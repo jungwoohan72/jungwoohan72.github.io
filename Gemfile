@@ -13,3 +13,5 @@ gem "jekyll-feed", "~> 0.15.1"
 gem "jekyll-gist", "~> 1.5"
 
 gem "jekyll-paginate", "~> 1.1"
+
+gem "rexml", ">= 3.2.5"

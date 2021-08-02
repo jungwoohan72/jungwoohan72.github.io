@@ -1,6 +1,6 @@
 ---
 layout: category
-title: Markup
+title: Toy Projects
 ---
 
 Another sample category page.

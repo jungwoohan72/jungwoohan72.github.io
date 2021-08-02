@@ -1,6 +1,6 @@
 ---
 layout: category
-title: Edge Case
+title: Papers Explained
 ---
 
 Sample category page. You need to create a page for each category.

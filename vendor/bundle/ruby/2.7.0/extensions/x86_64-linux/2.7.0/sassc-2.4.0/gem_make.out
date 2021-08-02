@@ -1,5 +1,5 @@
 current directory: /home/jungwoo/catkin_ws/src/jungwoohan72.github.io/vendor/bundle/ruby/2.7.0/gems/sassc-2.4.0/ext
-/home/jungwoo/.rbenv/versions/2.7.3/bin/ruby -I /home/jungwoo/.rbenv/versions/2.7.3/lib/ruby/2.7.0 -r ./siteconf20210802-5741-gsocrl.rb extconf.rb
+/home/jungwoo/.rbenv/versions/2.7.3/bin/ruby -I /home/jungwoo/.rbenv/versions/2.7.3/lib/ruby/2.7.0 -r ./siteconf20210802-12377-t53dna.rb extconf.rb
 creating Makefile
 
 current directory: /home/jungwoo/catkin_ws/src/jungwoohan72.github.io/vendor/bundle/ruby/2.7.0/gems/sassc-2.4.0/ext
@@ -77,4 +77,4 @@ linking shared-object sassc/libsass.so
 
 current directory: /home/jungwoo/catkin_ws/src/jungwoohan72.github.io/vendor/bundle/ruby/2.7.0/gems/sassc-2.4.0/ext
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 libsass.so ./.gem.20210802-5741-1pbzsi/sassc
+/usr/bin/install -c -m 0755 libsass.so ./.gem.20210802-12377-12qh2j1/sassc

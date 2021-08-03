@@ -3,25 +3,4 @@ layout: category
 title: Algorithm Explained
 ---
 
-Sample category page. You need to create a page for each category.
-The category is inferred from the title of the page, but you can also
-specify it with the `category` attribute in the front matter.
-
-```md
----
-layout: category
-title: My Category
----
-```
-
-Or ...
-
-```md
----
-layout: category
-title: Fancy Title
-category: My Category
----
-```
-
-Posts get listed below here.
+나동빈 저자님의 '이것이 취업을 위한 코딩 테스트다'를 기반으로 한 알고리즘 정리 노트.

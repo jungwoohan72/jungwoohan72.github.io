@@ -1,6 +1,6 @@
 ---
 layout: category
-title: Toy Projects
+title: RL Algorithm Replication
 ---
 
 Another sample category page.

@@ -8,6 +8,7 @@ tags:
   - Multi agents
   - Task allocation
 ---
+Paper Link: https://arxiv.org/abs/1907.10360
 
 # Abstract
 1. Delivering items from a given start to a goal pose in a factory setting while the delivering robots need to avoid 
@@ -25,4 +26,7 @@ Task Allocation and Path Finding (CTAPF)에 contribution을 잡은 듯 하다. �
 연구 분야가 존재하는 걸로 아는데 아무튼 그렇다고 한다.
 4. 아래는 이 논문이 사용한 환경 세팅이다. 각 agent가 부품을 특정 goal position까지 collision 없이 옮기는 미션이다. 
 
-![env](/_screenshots/2021_08_04_1.png?raw=true)
+<p align="center">
+    <img src = "https://user-images.githubusercontent.com/45442859/128128655-2f07aad7-11fe-44b7-862a-673080966d37.png" alt = "env" width = "50%" height = "50%"/>
+</p>
+

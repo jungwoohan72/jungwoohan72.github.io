@@ -4,8 +4,9 @@ title: An Optimal Algorithm to Solve the Combined Task Allocation and Path Findi
 categories:
   - Papers Explained
 tags:
-  - MATF
+  - TAPF
   - Multi agents
+  - Task allocation
 ---
 
 # Abstract

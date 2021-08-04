@@ -22,6 +22,6 @@ delivery jobs to the agents while not considering such collisions between the ag
 3. 이 논문의 저자는 MAPF와 MATA의 특성을 모두 고려하여, Task Allocation을 진행하되 collision-free Path Finding을 제시하는 Combined
 Task Allocation and Path Finding (CTAPF)에 contribution을 잡은 듯 하다. 내가 알기론 Task Allocation and Path Finding (TAPF)라는 
 연구 분야가 존재하는 걸로 아는데 아무튼 그렇다고 한다.
-4. 아래는 이 논문이 사용한 환경 세팅이다. 
+4. 아래는 이 논문이 사용한 환경 세팅이다. 각 agent가 부품을 특정 goal position까지 collision 없이 옮기는 미션이다. 
 
-![env](./_screenshots/2021_08_04_1.png)
+![env](/_screenshots/2021_08_04_1.png?raw=true)

@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 그리디 (Greedy) 알고리즘  
+title: Benchmarking Deep Reinforcement Learning for Continuous Control
 categories:
-  - Algorithm Explained
+  - RL Algorithm Replication
 tags:
   - algorithm
-  - coding test
+  - RL
 last_modified_at: 2021-08-03T09:42:52-05:00
 ---
 

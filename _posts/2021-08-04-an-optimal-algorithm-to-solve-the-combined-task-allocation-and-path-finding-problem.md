@@ -8,7 +8,7 @@ tags:
   - Multi agents
   - Task allocation
 ---
-Paper Link: https://arxiv.org/abs/1907.10360
+Paper Link: [https://arxiv.org/abs/1907.10360](https://arxiv.org/abs/1907.10360)
 
 # Abstract
 1. Delivering items from a given start to a goal pose in a factory setting while the delivering robots need to avoid 

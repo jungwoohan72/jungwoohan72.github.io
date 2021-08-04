@@ -2,7 +2,7 @@
 layout: post
 title: Benchmarking Deep Reinforcement Learning for Continuous Control
 categories:
-  - RL Algorithm Replication
+  - Algorithm Explained
 tags:
   - algorithm
   - RL

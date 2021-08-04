@@ -4,10 +4,12 @@ title: About Me
 sidebar_link: true
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it
-  for your own use upon downloading. Carry on!
-</p>
+<center>
 
-To make pages show up in the sidebar, add `sidebar_link: true` to the front
-matter.
+# Jungwoo Han
+<U>jungwoohan72@kaist.ac.kr</U>
+</center>
+
+<p align="center">
+    <img src = "https://user-images.githubusercontent.com/45442859/128219290-d445b47f-7268-4147-bfa8-cb2826b1023b.jpg" alt = "profile" width = "30%" height = "30%"/>
+</p>

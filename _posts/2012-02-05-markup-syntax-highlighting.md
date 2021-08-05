@@ -1,124 +1,60 @@
 ---
-title: "Markup: Syntax Highlighting"
+title: 20대 남자 모더나 백신 후기
 layout: post
-excerpt: "Post displaying the various ways one can highlight code blocks with Jekyll. Some options include standard Markdown, GitHub Flavored Markdown, and Jekyll's `{% highlight %}` tag."
-last_modified_at: 2012-02-05T10:27:01-05:00
-tags:
-  - code
-  - syntax highlighting
+categories:
+  - Blog
 ---
 
-Syntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. Highlighting does not affect the meaning of the text itself; it is intended only for human readers.[^1]
+저는 참고로 평소에도 유산소 무산소 운동을 꾸준히 진행하고, 기저질환 없는 신체건강한 20대입니다. 백신을 맞고 굉장히 신경 쓰이는 증상이 지속되어 혹시나 하는 마음에 백신 부작용 증빙자료로 남겨두기 위해 이 포스팅을 만듭니다.
 
-[^1]: <http://en.wikipedia.org/wiki/Syntax_highlighting>
+# 2021.07.30 모더나 1차 접종 (1일차)
 
-## GFM Code Blocks
+<p align="center">
+    <img src = "https://user-images.githubusercontent.com/45442859/128324651-ee53e7e1-b7d1-45ca-8ab7-5701ea893dd3.jpg" alt = "vaccine" width = "50%" height = "50%"/>
+</p>
 
-GitHub Flavored Markdown [fenced code blocks](https://help.github.com/articles/creating-and-highlighting-code-blocks/) are supported by default with Jekyll. You may need to update your `_config.yml` file to enable them if you're using an older version.
+백신 다들 빨리 맞자는 분위기라서 어찌저찌 잔여백신 구해서 맞았습니다. 모더나네요. 주사 맞은 부위만 어깨 운동 제대로 했을 때처럼 근육통 비슷하게 있고, 발열, 오한,
+구토 등 다른 부작용은 하나도 없었습니다. 
 
-```yaml
-kramdown:
-  input: GFM
-```
+<p align="center">
+    <img src = "https://user-images.githubusercontent.com/45442859/128324660-fedc5945-de3b-45d1-b7e3-f57ad753cb70.jpg" alt = "vaccine" width = "50%" height = "50%"/>
+</p>
 
-Here's an example of a CSS code snippet written in GFM:
+# 2021.08.02 부작용 (3일차)
 
-```css
-#container {
-  float: left;
-  margin: 0 -240px 0 0;
-  width: 100%;
-}
-```
+* 발열증상 없음
+* 가슴 답답함 지속
 
-Yet another code snippet for demonstration purposes:
+주말에도 어깨 근육통이 가시질 않아서 운동 안하고 푹 쉬었습니다. 근데 월요일이 되고 출근 하자마자 일이 터지네요. 
+컴퓨터 앞에 딱 앉으니까 가슴 답답함 때문에 숨 쉬기가 어려운 게 느껴졌습니다. 그래서 정말 큰일 났구나 하고, 바로 근처 내과로 갔죠.
+엑스레이 찍고, 심전도도 해봤는데, 별 이상 없답니다. 그래서 일단 기분탓인갑다 하고 다시 일하러 갔습니다.
+근데 가슴 답답한 건 없어지질 않네요.
 
-```ruby
-module Jekyll
-  class TagIndex < Page
-    def initialize(site, base, dir, tag)
-      @site = site
-      @base = base
-      @dir = dir
-      @name = 'index.html'
-      self.process(@name)
-      self.read_yaml(File.join(base, '_layouts'), 'tag_index.html')
-      self.data['tag'] = tag
-      tag_title_prefix = site.config['tag_title_prefix'] || 'Tagged: '
-      tag_title_suffix = site.config['tag_title_suffix'] || '&#8211;'
-      self.data['title'] = "#{tag_title_prefix}#{tag}"
-      self.data['description'] = "An archive of posts tagged #{tag}."
-    end
-  end
-end
-```
+# 2021.08.03 심장 초음파 (4일차)
 
-## Jekyll Highlight Liquid Tag
+* 발열증상 없음
+* 가슴 답답함 지속
 
-Jekyll also has built-in support for syntax highlighting of code snippets using either Rouge or Pygments, using a dedicated Liquid tag as follows:
+가슴 답답한 건 여전합니다. 문제는 조금만 격하게 움직여서 심장 뛰는 게 빨라지면 호흡이 힘들어진다는 걸 인지했습니다. 그래서 또 병원으로 갑니다.
+초음파는 비싸다고 하셔서 정말 문제가 있을 때 찍어보자 하셨는데, 비싼거고 나발이고 일단 살아야 되지 않겠습니까. 
+다행히 학교에서 70퍼센트까지는 비용 부담을 해준다고 해서 초음파도 찍고, 혈액검사도 진행했습니다. 결과는 다음날 아침에 알려준다네요.
+아직까진 발열, 오한 등의 증상은 없고, 가슴이 찝찝하게 불편합니다.
 
-```liquid
-{% raw %}{% highlight scss %}
-.highlight {
-  margin: 0;
-  padding: 1em;
-  font-family: $monospace;
-  font-size: $type-size-7;
-  line-height: 1.8;
-}
-{% endhighlight %}{% endraw %}
-```
+# 2021.08.04 검사 결과 (5일차)
 
-And the output will look like this:
+* 발열증상 없음
+* 가슴 답답함 지속
 
-{% highlight scss %}
-.highlight {
-  margin: 0;
-  padding: 1em;
-  font-family: $monospace;
-  font-size: $type-size-7;
-  line-height: 1.8;
-}
-{% endhighlight %}
+검사 결과는 역시 이상 없답니다. 이게 더 사람 미치게 합니다. 분명 증상이 있는데, 검사는 문제가 없답니다. 
+심리적 문제가 아닐까 싶어서 최대한 마음을 편하게 먹어봅니다. 증상이 좀 완화되는 것 같긴 합니다.
+무서워서 네이버 검색을 좀 해보니 저랑 비슷한 증상을 겪고 계신 분들이 꽤 있더군요. 
 
-Here's an example of a code snippet using the Liquid tag and `linenos` enabled.
+링크: [백신 이상 증상](https://blog.naver.com/wls0474/222416964422)
 
-{% highlight html linenos %}
-{% raw %}<nav class="pagination" role="navigation">
-  {% if page.previous %}
-    <a href="{{ site.url }}{{ page.previous.url }}" class="btn" title="{{ page.previous.title }}">Previous article</a>
-  {% endif %}
-  {% if page.next %}
-    <a href="{{ site.url }}{{ page.next.url }}" class="btn" title="{{ page.next.title }}">Next article</a>
-  {% endif %}
-</nav><!-- /.pagination -->{% endraw %}
-{% endhighlight %}
+# 2021.08.05 (6일차)
 
-## Code Blocks in Lists
+* 발열증상 없음
+* 가슴 답답함 지속
 
-Indentation matters. Be sure the indent of the code block aligns with the first non-space character after the list item marker (e.g., `1.`). Usually this will mean indenting 3 spaces instead of 4.
-
-1. Do step 1.
-2. Now do this:
-
-   ```ruby
-   def print_hi(name)
-     puts "Hi, #{name}"
-   end
-   print_hi('Tom')
-   #=> prints 'Hi, Tom' to STDOUT.
-   ```
-
-3. Now you can do this.
-
-## GitHub Gist Embed
-
-GitHub Gist embeds can also be used:
-
-```html
-<script src="https://gist.github.com/mmistakes/77c68fbb07731a456805a7b473f47841.js"></script>
-```
-
-Which outputs as:
-
-<script src="https://gist.github.com/mmistakes/77c68fbb07731a456805a7b473f47841.js"></script>
+뭐 어제보단 나은 거 같긴 한데, 여전히 신경 쓰입니다. 근데 2차는 아마 안 맞을거 같습니다. 백신 맞았다가 정신건강, 몸건강 다 잃게 생겼습니다. 
+이번주는 운동 쉬면서 휴식 취하고 다음주에도 이런 증상이 계속 되면 큰 병원으로 가볼까합니다.

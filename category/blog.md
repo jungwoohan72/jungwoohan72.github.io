@@ -1,4 +1,4 @@
 ---
 layout: category
-title: Papers Explained
+title: Blog
 ---

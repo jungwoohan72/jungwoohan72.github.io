@@ -47,5 +47,6 @@ computational cost 측면에서 이점을 가지는 solution을 찾기 위한 �
 
 # Attention Model
 
-* Encoder produces embeddings of all input nodes
-* Decoder produces the sequence **&pi;** of input nodes, one node at a time
+* Encoder produces embeddings of all input nodes.
+* Decoder produces the sequence **&pi;** of input nodes, one node at a time. Also, the decoder observes a mask to know which nodes have been visited.
+

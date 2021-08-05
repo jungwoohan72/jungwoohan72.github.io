@@ -14,7 +14,6 @@ Continuous Control에 대한 벤치마크를 제공한 논문인 Benchmarking De
 policy gradient 알고리즘 중 하나로 사용됨. 
 
 # 위 논문이 왜 중요한가?
-
 * 많이들 아는 Atari 게임을 강화학습을 통해 플레이한 것은 raw pixel data를 받아서 discrete한 action space 중 적절한 action을 취하도록 한 것임.
 * 이 논문이 나올 2016년 당시에만 해도 continuous action space에서 challenging한 문제를 강화학습으로 푼 벤치마크가 존재하지 않아 알고리즘 별로 성능 비교하기가 어려웠음.
 * Systematic한 성능 평가와 알고리즘 별 성능 비교는 이 분야의 발전을 위해서 필수적임.

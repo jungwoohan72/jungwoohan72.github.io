@@ -35,5 +35,5 @@ Task Allocation and Path Finding (CTAPF)에 contribution을 잡은 듯 하다. �
 2. **Single-Task/Single-Robot/Time-Extended**로 설계 되었으며, 이 의미는 하나의 로봇은 한번에 하나의 task만 수행할 수 있고, 모든 task는 하나의 로봇으로 수행 가능하다는 뜻이다.
 3. 각 robot의 capacity는 1로 설정 (i.e. 한번에 하나의 부품만 운반 가능)
 4. Collision-free path를 찾기 위해 optimal solver로 분류되는 **Conflict-Based Search (CBS)** 사용.
-5. MILP를 사용해 MATA와 MAPF를 함께 풀고자 하는 시도가 있었지만 agent 간의 conflict가 고려가 안 됐기 때문에 본 논문에서는 **Mixed Integer Non-Linear Programming (MINLP)**로 풀고자 함.
+5. MILP를 사용해 MATA와 MAPF를 함께 풀고자 하는 시도가 있었지만 agent 간의 conflict가 고려가 안 됐기 때문에 본 논문에서는 **Mixed Integer Non-Linear Programming (MINLP)** 로 풀고자 함.
 

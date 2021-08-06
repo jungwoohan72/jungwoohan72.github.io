@@ -74,11 +74,14 @@ Attention은 seq-to-seq 모델에 많이 쓰이는데, 한 문장을 다른 언�
 2. Embedding에 Weight matrix를 곱해서 (query, key, value) set을 만듬. Multi-Head Attention이라고 불리우는 이유는 좀 더 다양한 feature들을 고려하기 위해 (query, key, value) set을 생성할 때 
 dimension을 쪼개기 때문이다. 예를 들면 Single Head Attention으로 128x128 weight matrix를 사용해 128-dimensional vector로 project 해주는 대신에 8개의 16x128 weight matrix를 사용해서 16-dimensional vector 8개를 만들어
 나중에 합친다.
+
 <p align="center">
     <img src = "https://user-images.githubusercontent.com/45442859/128448124-29776d0f-6f63-42c8-a1b1-8383469d0063.png" alt = "query" width = "50%" height = "50%"/>
 </p>
+
 3. 기준이 되는 node의 query와 나머지 주변 node들의 key끼리 dot-product를 해줘서 compatibility를 계산. 예를 들면, 1번 노드에게 나머지 노드들이 얼마나 의미를 가지는가 하는
 점수를 계산해주는 과정. 너무 멀리 떨어져 있는 node의 경우 아래와 같이 처리.
+
 <p align = "center">
     <img src = "https://user-images.githubusercontent.com/45442859/128448677-58382d71-5595-4249-a494-8106ec025a9b.png" alt = "MHA" width = "75%" height = "75%"/>
 </p>

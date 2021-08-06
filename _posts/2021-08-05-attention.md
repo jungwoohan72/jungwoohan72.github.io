@@ -68,54 +68,54 @@ Attention은 seq-to-seq 모델에 많이 쓰이는데, 한 문장을 다른 언�
 * Output은 여러 Multi-Head-Attention layer를 거친 embedding vector (128-dimensional)
 * 각 노드의 embedding과 더불어 노드들의 평균을 낸 aggregated embedding도 output으로 내줌.
 
-###각 Attention layer는 아래와 같이 구성
+### 각 Attention layer는 아래와 같이 구성
 
 1. 일단 Raw Input이 MLP를 거치고 나면 128-dimensional Embedding이 만들어짐. (첫번째 초록색 화살표)
 2. Embedding에 Weight matrix를 곱해서 (query, key, value) set을 만듬. Multi-Head Attention이라고 불리우는 이유는 좀 더 다양한 feature들을 고려하기 위해 (query, key, value) set을 생성할 때 
 dimension을 쪼개기 때문이다. 예를 들면 Single Head Attention으로 128x128 weight matrix를 사용해 128-dimensional vector로 project 해주는 대신에 8개의 16x128 weight matrix를 사용해서 16-dimensional vector 8개를 만들어
 나중에 합친다.
 <p align="center">
-    <img src = "https://user-images.githubusercontent.com/45442859/128448124-29776d0f-6f63-42c8-a1b1-8383469d0063.png" alt = "" width = "30%" height = "30%"/>
+    <img src = "https://user-images.githubusercontent.com/45442859/128448124-29776d0f-6f63-42c8-a1b1-8383469d0063.png" alt = "query" width = "50%" height = "50%"/>
 </p>
 3. 기준이 되는 node의 query와 나머지 주변 node들의 key끼리 dot-product를 해줘서 compatibility를 계산. 예를 들면, 1번 노드에게 나머지 노드들이 얼마나 의미를 가지는가 하는
 점수를 계산해주는 과정. 너무 멀리 떨어져 있는 node의 경우 아래와 같이 처리.
 <p align = "center">
-    <img src = https://user-images.githubusercontent.com/45442859/128448677-58382d71-5595-4249-a494-8106ec025a9b.png />
+    <img src = https://user-images.githubusercontent.com/45442859/128448677-58382d71-5595-4249-a494-8106ec025a9b.png alt = "MHA" width = "75%" height = "75%"/>
 </p>
 
 <p align = "center">
-    <img src = https://user-images.githubusercontent.com/45442859/128448736-5aa89b09-1dc6-4d0e-b037-bacb7d209352.png />
+    <img src = https://user-images.githubusercontent.com/45442859/128448736-5aa89b09-1dc6-4d0e-b037-bacb7d209352.png alt = "u" width = "50%" height = "50%"/>
 </p>
 
 4. 계산된 compatibility에 softmax function을 씌워서 normalize 시켜준 값을 attention score로 씀.
 
 <p align = "center">
-    <img src = https://user-images.githubusercontent.com/45442859/128448860-8dc3d6a9-d875-4640-8118-067328e00cb2.png />
+    <img src = https://user-images.githubusercontent.com/45442859/128448860-8dc3d6a9-d875-4640-8118-067328e00cb2.png alt = "a" width = "25%" height = "25%"/>
 </p>
 
 5. 각 attention score는 각 노드의 value vector와 곱해져서 전부 더해짐.
 
 <p align = "center">
-    <img src = https://user-images.githubusercontent.com/45442859/128448936-b8c8e0f6-c512-435a-b052-bbbc978bc3db.png />
+    <img src = https://user-images.githubusercontent.com/45442859/128448936-b8c8e0f6-c512-435a-b052-bbbc978bc3db.png alt = "h" width = "25%" height = "25%"/>
 </p>
 
 6. Multi-Head Attention인 경우 위의 h'<sub>i</sub> vector는 16x1의 크기를 가진다. 앞에서 말했듯이 이 같은 8개의 vector에 128x16 weight matrix를 곱해주어 모두 더해서 최종적으로
 128x1 Embedding vector를 만들어 낸다.
 
 <p align = "center">
-    <img src = https://user-images.githubusercontent.com/45442859/128452206-936ed6eb-f3d5-413f-a2cc-4d7f1e98a835.png />
+    <img src = https://user-images.githubusercontent.com/45442859/128452206-936ed6eb-f3d5-413f-a2cc-4d7f1e98a835.png alt = "MHA_sig" width = "75%" height = "75%"/>
 </p>
 
 위 과정이 하나의 Attention layer에서 일어나는 일이다. 
 
-###Attention Layer를 통과하고 난 다음의 Feed-Forward Layer는 단순하게 ReLU와 Batch Normalization으로 이루어짐.
+### Attention Layer를 통과하고 난 다음의 Feed-Forward Layer는 단순하게 ReLU와 Batch Normalization으로 이루어짐.
 
 <p align = "center">
-    <img src = https://user-images.githubusercontent.com/45442859/128452744-f8bc1fb8-be4e-40f4-9e4d-d10641048b59.png />
+    <img src = https://user-images.githubusercontent.com/45442859/128452744-f8bc1fb8-be4e-40f4-9e4d-d10641048b59.png alt = "BN" width = "75%" height = "75%"/>
 </p>
 
 <p align = "center">
-    <img src = https://user-images.githubusercontent.com/45442859/128452912-436ec81e-11eb-4c53-b978-3ec542a2e70a.png />
+    <img src = https://user-images.githubusercontent.com/45442859/128452912-436ec81e-11eb-4c53-b978-3ec542a2e70a.png alt = "FF" width = "75%" height = "75%"/>
 </p>
 
 ## Decoder

@@ -145,6 +145,10 @@ class REINFORCE(nn.Module):
         loss.backward()
         self.opt.step()
 ```
+
+* 그냥 log가 아니라 -log인 이유는 pytorch의 opt.step()은 loss function을 minimizing하는 방향으로 학습을 시키기 때문인데, 여기서는 loss function이 value function이고,
+이를 최대화 시키는 방향으로 policy를 학습시키고 싶기 때문이다. -log를 minimize하는 건 log를 maximize하는 것과 같음.
+
 ## 학습 결과
 * 간단한 환경이지만 학습이 잘 된듯하다. max episode length인 500까지 모두 도달.
 

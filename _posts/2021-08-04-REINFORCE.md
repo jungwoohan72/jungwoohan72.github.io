@@ -66,7 +66,10 @@ Policy gradient 알고리즘은 **&theta;** 로 표현될 수 있는 cost functi
     <img src = "https://user-images.githubusercontent.com/45442859/128178483-ce5a5d6f-8e5a-449a-9c3a-630309fa1643.png" alt = "env" width = "75%" height = "75%"/>
 </p>
 
-# Pseudocode
+처음에 수식적으로 왜 +인지 살짝 헷갈렸는데, 보통의 gradient descent가 아니라, 여기선 theta를 objective function을 maximize하는 방향으로 학습시켜줘야 되기 때문에 경사 방향을 그대로 유지해줘야 한다.
+예를 들면, gradient가 음수라고 하면, theta가 감소할 때 objective function이 증가한다는 뜻이다. 그래서 기존 theta 값에서 빼줘야 된다. 
+
+# Pseudocode for vanilla REINFORCE
 
 <p align="center">
     <img src = "https://user-images.githubusercontent.com/45442859/128178615-b78f22b8-cb15-467a-9660-befa4b6d4f51.png" alt = "env" width = "100%" height = "100%"/>
@@ -76,7 +79,32 @@ Policy gradient 알고리즘은 **&theta;** 로 표현될 수 있는 cost functi
 
 ![Image](https://user-images.githubusercontent.com/45442859/128178929-fe68a42b-4576-417d-9fcf-224628493c44.png)
 
-# Implementation
+# REINFORCE with Baseline
+
+REINFORCE는 Monte Carlo 방식이므로 unbiased한 return을 사용할 수 있다는 장점이 있지만, episode 별로 분산이 크다. 이런 단점을 해결하기 위해 Baseline이라는 
+개념을 도입한다. 
+
+![image](https://user-images.githubusercontent.com/45442859/128862179-01a1a2dc-1d72-4457-bbeb-f2bae85b6c98.png)
+
+b(s)를 빼줘도 전체 수식에 영향이 없는 이유는 b(s)는 a에 independent하기 때문이다.
+
+![image](https://user-images.githubusercontent.com/45442859/128862303-78750d8d-28f4-4791-b51f-858dae9a2385.png)
+
+그래서 update rule은 아래와 같이 유도할 수 있다.
+
+![image](https://user-images.githubusercontent.com/45442859/128862419-41a25faa-8079-4d46-8621-35465e3a4303.png)
+
+보통 이 baseline을 value function으로 잡는데, 그 이유는 직관적으로 생각해보면 G<sub>t</sub>-b(S<sub>t</sub>) 식으로부터 현재의 행동으로 인한 return (G or Q)이 평균적으로 얻을 수 있는 return (V)보다 
+얼마나 좋은지를 측정 가능하기 때문이다. 
+
+# Pseudocode for REINFORCE with Baseline
+
+![image](https://user-images.githubusercontent.com/45442859/128862971-38f98d82-786e-438f-885e-370364ede6dc.png)
+
+추가적인 데이터를 얻어야 되는 필요성 없이 baseline이 되는 value function을 학습 가능하다. 에피소드로부터 time step마다의 return을 계산 가능하고, 
+학습하는 value function이 이같은 return을 따라가도록 학습시키는 것이다. 생각보다 이같은 baseline 기법을 사용하는 게 성능 차이가 많이 난다고 한다.
+
+# REINFORCE Implementation
 
 ```python
 import torch
@@ -132,7 +160,8 @@ class REINFORCE(nn.Module):
             returns.append(g)
 
         returns = torch.tensor(returns).to(self.device)
-
+        
+        # baseline trick!!! Return들의 평균값을 baseline으로 사용.
         returns = (returns - returns.mean()) / (returns.std() + self._eps)
         returns.to(self.device)
 

@@ -7,6 +7,11 @@ sidebar_link: true
 <center>
 
 # Jungwoo Han
+
+</center>
+
+<center>
+
 <U>jungwoohan72@kaist.ac.kr</U>
 
 </center>

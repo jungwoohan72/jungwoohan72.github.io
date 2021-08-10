@@ -66,6 +66,9 @@ Policy gradient 알고리즘은 **&theta;** 로 표현될 수 있는 cost functi
     <img src = "https://user-images.githubusercontent.com/45442859/128178483-ce5a5d6f-8e5a-449a-9c3a-630309fa1643.png" alt = "env" width = "75%" height = "75%"/>
 </p>
 
+처음에 수식적으로 왜 +인지 살짝 헷갈렸는데, 보통의 gradient descent가 아니라, 여기선 theta를 objective function을 maximize하는 방향으로 학습시켜줘야 되기 때문에 경사 방향을 그대로 유지해줘야 한다.
+예를 들면, gradient가 음수라고 하면, theta가 감소할 때 objective function이 증가한다는 뜻이다. 그래서 기존 theta 값에서 빼줘야 된다. 
+
 # Pseudocode
 
 <p align="center">
@@ -133,7 +136,7 @@ class REINFORCE(nn.Module):
 
         returns = torch.tensor(returns).to(self.device)
 
-        returns = (returns - returns.mean()) / (returns.std() + self._eps)
+        returns = (returns - returns.mean()) / (returns.std() + self._eps) # baseline trick
         returns.to(self.device)
 
         dist = Categorical(logits = self.policy(states)) # probability for each action -> sampling

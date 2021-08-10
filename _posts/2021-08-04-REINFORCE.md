@@ -78,3 +78,74 @@ Policy gradient 알고리즘은 **&theta;** 로 표현될 수 있는 cost functi
 
 # Implementation
 
+```python
+import torch
+import torch.nn as nn
+import numpy as np
+
+from torch.distributions.categorical import Categorical
+
+class REINFORCE(nn.Module):
+    def __init__(self, policy, gamma, lr, device):
+        super(REINFORCE, self).__init__()
+        self.policy = policy
+        self.gamma = gamma
+        self.opt = torch.optim.Adam(params = self.policy.parameters(), lr = lr)
+        self._eps = 1e-25
+        self.device = device
+
+    def get_action(self, state):
+        with torch.no_grad():
+            logits = self.policy(state).to(self.device)
+            dist = Categorical(logits=logits)
+            a = dist.sample()
+        return a
+    
+    ###위에서 설명한 것처럼 매 time step마다 update하는 버전
+    def update_step_by_step(self, episode):
+        states = episode[0].flip(dims = [0]).to(self.device)
+        actions = episode[1].flip(dims = [0]).to(self.device)
+        rewards = episode[2].flip(dims = [0]).to(self.device)
+
+        g = 0
+        for s,a,r in zip(states, actions, rewards):
+            g = r + g*self.gamma
+            dist = Categorical(logits = self.policy(s)) # sampling
+            prob = dist.probs[a]
+
+            loss = -torch.log(prob + self._eps)*g
+
+            self.opt.zero_grad()
+            loss.backward()
+            self.opt.step()
+    
+    ### 매 step 업데이트하는 건 비효율적이기 때문에 보통 episode마다 업데이트한다고 함.
+    def update_episode(self, episode):
+        states = episode[0].flip(dims = [0]).to(self.device)
+        actions = episode[1].flip(dims = [0]).to(self.device)
+        rewards = episode[2].flip(dims = [0]).to(self.device)
+
+        g = 0
+        returns = []
+        for s,a,r in zip(states, actions, rewards):
+            g = r + self.gamma*g
+            returns.append(g)
+
+        returns = torch.tensor(returns).to(self.device)
+
+        returns = (returns - returns.mean()) / (returns.std() + self._eps)
+        returns.to(self.device)
+
+        dist = Categorical(logits = self.policy(states)) # probability for each action -> sampling
+        prob = dist.probs[range(states.shape[0]), actions] # (states.shape[0], 1) tensor
+
+        self.opt.zero_grad()
+        loss = -torch.log(prob+self._eps)*returns
+        loss = loss.mean()
+        loss.backward()
+        self.opt.step()
+```
+## 학습 결과
+* 간단한 환경이지만 학습이 잘 된듯하다. max episode length인 500까지 모두 도달.
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/45442859/128811906-10e920df-047a-4e19-b449-9e353b9da543.gif)

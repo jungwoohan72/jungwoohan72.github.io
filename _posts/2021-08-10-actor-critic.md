@@ -10,9 +10,9 @@ tags:
   - A3C
 ---
 
-Paper Link: [https://arxiv.org/abs/1602.01783](https://arxiv.org/abs/1602.01783)
+A3C Paper Link: [https://arxiv.org/abs/1602.01783](https://arxiv.org/abs/1602.01783)
 
-# Actor-Critic이란?
+# Synchronous Actor-Critic (A2C)이란?
 
 REINFORCE with Baseline의 update rule은 다음과 같다.
 

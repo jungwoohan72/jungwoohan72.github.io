@@ -103,7 +103,6 @@ class A2C(nn.Module):
 
 ```
 
-
 # Pseudocode for Q actor critic
 
 Critic으로 학습한 Q function 사용

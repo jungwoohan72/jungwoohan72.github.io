@@ -148,3 +148,39 @@ for i in range(1, n+1):
 * 이때 중복 간선을 포함하지 않는다면, E는 V<sup>2</sup>보다 항상 작다. 따라서 O(logE) < O(logV)이다.
 * 그러므로 시간 복잡도는 O(ElogV)이다. 
 
+## 플로이드 워셜 알고리즘
+
+* 플로이드 워셜 알고리즘은 모든 지점에서 다른 모든 지점까지의 최단 경로를 모두 구해야 하는 경우에 쓰이는 알고리즘이다.
+* 다익스트라는 단계마다 최단 거리를 가지는 노드를 하나씩 반복적으로 선택하고, 해당 노드를 거쳐 가는 경로를 확인하며, 최단 거리 테이블을 갱신.
+* 반면, 플로이드 워셜 알고리즘은 '거쳐 가는 노드'를 기준으로 알고리즘을 수행. 노드가 N개라면 각각의 노드에서 O(N<sup>2</sup>)만큼의 연산을 수행해서 '현재 노드를 거쳐 가는' 모든 경로를 고려.
+따라서 시간 복잡도는 O(N<sup>3</sup>).
+* 플로이드 워셜 알고리즘에서는 현재 확인하고 있는 노드를 제외하고, N-1개의 노드 중에서 서로 다른 노드 (A,B)쌍을 선택한다. 이후에 A -> 확인하고 있는 노드 -> B로 가는 비용을
+계산한 뒤에 최단 거리를 갱신.
+* 위 과정을 점화식으로 표현하면 D<sub>ab</sub> = min(D<sub>ab</sub>, D<sub>ak</sub>+D<sub>kb</sub>)이다.
+* 플로이드 워셜 알고리즘은 2차원 리스트에 '최단 거리' 정보를 저장해야 한다. 
+* 플로이드 워셜 알고리즘은 다이나믹 프로그래밍이다.
+
+```python
+
+INF = int(1e9)
+
+n = int(input()) # 노드 개수
+m = int(input()) # 간선 개수
+
+graph = [[INF] * (n+1) for _ in range(n+1)]
+
+for a in range(1, n+1): # self-connection은 0으로.
+    for b in range(1, n+1):
+        if a == b:
+            graph[a][b] = 0
+
+for _ in range(m):
+    a,b,c = map(int, input().split())
+    graph[a][b] = c # a에서 b로 가는 비용이 c
+
+for k in range(1,n+1):
+    for a in range(1, n+1):
+        for b in range(1,n+1):
+            graph[a][b] = min(graph[a][b], graph[a][k] + graph[k][b])
+
+```

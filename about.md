@@ -10,7 +10,7 @@ sidebar_link: true
     <img src = "https://user-images.githubusercontent.com/45442859/128219290-d445b47f-7268-4147-bfa8-cb2826b1023b.jpg" alt = "profile" width = "30%" height = "30%"/>
 </p>
 
-<center>
+<div align = "center">
 
 **KAIST ME**
 
@@ -24,4 +24,4 @@ jungwoohan72@kaist.ac.kr
 
 [Github](https://github.com/jungwoohan72/)
 
-</center>
+</div>

@@ -11,11 +11,11 @@ sidebar_link: true
 </p>
 
 **<center>KAIST ME</center>**
-**<center>Mobile Robotics and Intelligence Lab (MORIN)</center>**
+**<center>[Mobile Robotics and Intelligence Lab (MORIN)](https://morin.kaist.ac.kr/) </center>**
 **<center>MS Student</center>**
 
 <center>jungwoohan72@kaist.ac.kr</center>
 
-[CV](https://drive.google.com/file/d/1OhnFl7uS7LvuaBuK56f3yfH8wuUROfHZ/)
+**<center>[CV](https://drive.google.com/file/d/1OhnFl7uS7LvuaBuK56f3yfH8wuUROfHZ/) </center>**
 
-[Github](https://github.com/jungwoohan72/)
+**<center>[Github](https://github.com/jungwoohan72/) </center>**

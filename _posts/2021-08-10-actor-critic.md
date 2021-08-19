@@ -231,7 +231,7 @@ def train(global_model, rank):
             for global_param, local_param in zip(global_model.parameters(), local_model.parameters()):
                 global_param._grad = local_param.grad
             optimizer.step()
-            local_model.load_state_dict(global_model.state_dict())
+            local_model.load_state_dict(global_model.state_dict()) 
 
     env.close()
     print("Training process {} reached maximum episode.".format(rank))

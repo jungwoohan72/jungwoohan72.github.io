@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Actor-Critic (A2C and A3C)
+title: Actor-Critic (A3C)
 categories:
   - RL Algorithm Replication
 tags:
@@ -12,7 +12,7 @@ tags:
 
 A3C Paper Link: [https://arxiv.org/abs/1602.01783](https://arxiv.org/abs/1602.01783)
 
-# Synchronous Actor-Critic (A2C)이란?
+# Actor-Critic 이란?
 
 REINFORCE with Baseline의 update rule은 다음과 같다.
 
@@ -34,13 +34,13 @@ Actor-Critic Method이다.
 bias 같은 경우는 TD(1), TD(2), ...와 같이 n-step return을 사용함으로써 줄일 수 있다. 
 이렇게 action의 quality를 평가하기 위해 사용되는 상태가치함수를 critic이라고 한다.
 
-# Pseudocode for REINFORCE
+## Pseudocode for REINFORCE
 
 Actor-critic과 REINFORCE의 비교를 위해 REINFORCE의 Pseudo 코드를 다시 한 번 보고 가자.
 
 ![image](https://user-images.githubusercontent.com/45442859/128873153-4859a50c-94e3-4d59-9d07-c7a0df078159.png)
 
-# Pseudocode for TD actor critic
+## Pseudocode for TD actor critic
 
 ![image](https://user-images.githubusercontent.com/45442859/128870090-a57ee7ad-9a46-41b2-94a0-92b7cee43380.png)
 
@@ -103,8 +103,179 @@ class A2C(nn.Module):
 
 ```
 
-# Pseudocode for Q actor critic
+TD Error의 경우 Advantage Function의 unbiased estimate이므로 Critic으로 Advantage Function을 사용하기도 한다.
+하지만 TD Error을 사용하면 Advantage Function을 사용할 때와 달리, 상태가치함수만 학습하면 된다.
+
+## Pseudocode for Q actor critic
 
 Critic으로 학습한 Q function 사용
 
 ![image](https://user-images.githubusercontent.com/45442859/128870844-0e8ce83f-1a74-4ddf-9a2d-964d5c8eea80.png)
+
+## Actor-Critic 종류
+
+![image](https://user-images.githubusercontent.com/45442859/129993657-1aa7d106-6773-461a-ae99-e4a99db60894.png)
+
+# Asynchronous Advantage Actor-Critic
+
+논문에서 다루는 A3C 알고리즘은 TD Actor-Critic을 Asynchronous하게 업데이트한다. 즉, Global하게 공유하는 Actor-Critic pair를 여러개의 Actor-Critic thread를 통해
+업데이트하는 과정이다. Training과 정은 TD Actor-Critic과 동일하며, 여러 개의 thread를 사용해서 비동기적으로 업데이트한다는 특징이 있다.
+
+## Pseudocode for A3C
+
+![image](https://user-images.githubusercontent.com/45442859/130006230-ef9e6924-2ee9-4439-8e6f-77c656d75c83.png)
+
+* t는 local actor-critic thread 업데이트를 위해 사용됨.
+* T는 local actor-critic update의 총합. 즉, global actor-critic이 몇 번 업데이트 되었는지를 체크.
+* local actor-critic은 global actor-critic으로부터 parameter를 t<sub>max</sub>마다 복사해서 학습에 사용.
+* Loss function을 보면 TD error가 사용된 것을 볼 수 있다.
+
+## Implementation of A3C
+
+Miltiprocessing을 진행해야 하기 때문에 구현을 어떻게 해야할지 감이 안 왔다. 그래서 그냥 느낌만 잡고 가기로 결정!
+
+[https://github.com/seungeunrho/minimalRL](https://github.com/seungeunrho/minimalRL)
+
+강화학습 유튜버 팡요랩 님이 운영하시는 Github인데 논문 읽기 전에 관련 영상을 보고 읽으면 이해가 더 잘 된다. 추천!
+
+그리고 위 A3C 코드가 내가 구글링해서 본 모든 코드 중에서 가장 간결하고 논문 flow 그대로 구현한 것 같다. 
+
+
+위의 Vanilla Actor-Critic과 비교했을 때 진짜 빠르고, 성능이 좋다... 신기...
+
+```python
+
+import gym
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+from torch.distributions import Categorical
+import torch.multiprocessing as mp
+import time
+
+# Hyperparameters
+n_train_processes = mp.cpu_count()
+learning_rate = 0.0002
+update_interval = 5
+gamma = 0.98
+max_train_ep = 500
+max_test_ep = 520
+
+
+class ActorCritic(nn.Module):
+    def __init__(self):
+        super(ActorCritic, self).__init__()
+        self.fc1 = nn.Linear(4, 256)
+        self.fc_pi = nn.Linear(256, 2)
+        self.fc_v = nn.Linear(256, 1)
+
+    def pi(self, x, softmax_dim=0):
+        x = F.relu(self.fc1(x))
+        x = self.fc_pi(x)
+        prob = F.softmax(x, dim=softmax_dim)
+        return prob
+
+    def v(self, x):
+        x = F.relu(self.fc1(x))
+        v = self.fc_v(x)
+        return v
+
+
+def train(global_model, rank):
+    local_model = ActorCritic()
+    local_model.load_state_dict(global_model.state_dict())
+
+    optimizer = optim.Adam(global_model.parameters(), lr=learning_rate)
+
+    env = gym.make('CartPole-v1')
+
+    for n_epi in range(max_train_ep):
+        done = False
+        s = env.reset() # s.shape -> (4,)
+        while not done:
+            s_lst, a_lst, r_lst = [], [], []
+            for t in range(update_interval):
+                prob = local_model.pi(torch.from_numpy(s).float()) # torch.size([2]) | torch.from_numpy(s).shape: torch.size([4])
+                m = Categorical(prob)
+                a = m.sample().item() # int
+                s_prime, r, done, info = env.step(a)
+
+                s_lst.append(s)
+                a_lst.append([a])
+                r_lst.append(r/100.0)
+
+                s = s_prime
+                if done:
+                    break
+
+            s_final = torch.tensor(s_prime, dtype=torch.float) # torch.size([4])
+            R = 0.0 if done else local_model.v(s_final).item()
+            td_target_lst = []
+            for reward in r_lst[::-1]:
+                R = gamma * R + reward # n-step TD target
+                td_target_lst.append([R])
+            td_target_lst.reverse()
+
+            s_batch, a_batch, td_target = torch.tensor(s_lst, dtype=torch.float), torch.tensor(a_lst), \
+                torch.tensor(td_target_lst) # torch.size([update_interval,4]), torch.size([update_interval,1]), torch.size([update_interval,1])
+            advantage = td_target - local_model.v(s_batch)
+
+            pi = local_model.pi(s_batch, softmax_dim=1)
+            pi_a = pi.gather(1, a_batch)
+            loss = -torch.log(pi_a) * advantage.detach() + \
+                F.smooth_l1_loss(local_model.v(s_batch), td_target.detach()) # torch.size([5,1])
+
+            optimizer.zero_grad()
+            loss.mean().backward()
+            for global_param, local_param in zip(global_model.parameters(), local_model.parameters()):
+                global_param._grad = local_param.grad
+            optimizer.step()
+            local_model.load_state_dict(global_model.state_dict())
+
+    env.close()
+    print("Training process {} reached maximum episode.".format(rank))
+
+
+def test(global_model):
+    env = gym.make('CartPole-v1')
+    score = 0.0
+    print_interval = 20
+
+    for n_epi in range(max_test_ep):
+        done = False
+        s = env.reset()
+        while not done:
+            if n_epi > 390:
+                env.render()
+            prob = global_model.pi(torch.from_numpy(s).float())
+            a = Categorical(prob).sample().item()
+            s_prime, r, done, info = env.step(a)
+            s = s_prime
+            score += r
+
+        if n_epi % print_interval == 0 and n_epi != 0:
+            print("# of episode :{}, avg score : {:.1f}".format(
+                n_epi, score/print_interval))
+            score = 0.0
+            time.sleep(1)
+    env.close()
+
+
+if __name__ == '__main__':
+    global_model = ActorCritic()
+    global_model.share_memory()
+
+    processes = []
+    print("Available CPU Count:", n_train_processes)
+    for rank in range(n_train_processes + 1):  # + 1 for test process
+        if rank == 0:
+            p = mp.Process(target=test, args=(global_model,))
+        else:
+            p = mp.Process(target=train, args=(global_model, rank,))
+        p.start()
+        processes.append(p)
+    for p in processes:
+        p.join()
+
+```

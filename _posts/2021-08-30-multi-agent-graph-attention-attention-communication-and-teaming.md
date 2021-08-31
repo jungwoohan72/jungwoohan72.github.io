@@ -136,12 +136,20 @@ Paper Link: [https://arxiv.org/abs/1911.10715](https://arxiv.org/abs/1911.10715)
 * Step 15&16: Determine action probability distribution from the policy and sample the action
 
 # Evaluation Environment
+* CommNet, IC3Net, GA-CommNet, TarMAC-IC3Net과 비교
 
 1. Predator-Prey
 * N predators with limited visions searching for a stationary prey
 * Predator action: up, down, left, right, stay
 * Predator incurs a reward -0.05 for each time step until the prey is found.
 * Episode is done when all the predators find the prey before a predefined maximum time limit.
+
+![image](https://user-images.githubusercontent.com/45442859/131469781-7e6e9dee-12bb-40a5-a0c1-4f0d028fadd0.png)
+
+![image](https://user-images.githubusercontent.com/45442859/131469919-75ef9578-71f8-4ff7-b128-43b2d7694f02.png)
+
+* Lesser communication after agent 5 first reaches the prey at step 23.
+* Other agents quickly reach the prey in the following 7 steps.
 
 2. Traffic Junction
 * Intersecting routes and cars with limited vision, requires communication to avoid collisions.
@@ -150,4 +158,3 @@ Paper Link: [https://arxiv.org/abs/1911.10715](https://arxiv.org/abs/1911.10715)
 * Action is either "gas" or "brake"
 * The goal is to maximize the success rate (i.e. no collisions within an episode)
 
-3. Google Research Football

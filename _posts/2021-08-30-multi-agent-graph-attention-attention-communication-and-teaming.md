@@ -137,3 +137,17 @@ Paper Link: [https://arxiv.org/abs/1911.10715](https://arxiv.org/abs/1911.10715)
 
 # Evaluation Environment
 
+1. Predator-Prey
+* N predators with limited visions searching for a stationary prey
+* Predator action: up, down, left, right, stay
+* Predator incurs a reward -0.05 for each time step until the prey is found.
+* Episode is done when all the predators find the prey before a predefined maximum time limit.
+
+2. Traffic Junction
+* Intersecting routes and cars with limited vision, requires communication to avoid collisions.
+* Cars enter the traffic junction with a probability p<sub>arrive</sub>
+* Maximum number of cars in the environment at a specific time is denotes as N<sub>max</sub>
+* Action is either "gas" or "brake"
+* The goal is to maximize the success rate (i.e. no collisions within an episode)
+
+3. Google Research Football

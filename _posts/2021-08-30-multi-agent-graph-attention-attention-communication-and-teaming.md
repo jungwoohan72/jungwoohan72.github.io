@@ -97,10 +97,10 @@ Paper Link: [https://arxiv.org/abs/1911.10715](https://arxiv.org/abs/1911.10715)
 ![image](https://user-images.githubusercontent.com/45442859/131338335-4ef3dee8-982c-47ba-8bda-fd2a5147eeb4.png)
 
 1. Wm = (D'xD)x(Dx1) = D'x1
-2. Concatenation -> 2D'x1 <- ||는 columnwise concatenation
+2. Concatenation -> 2D'x1 <- columnwise concatenation
 3. a<sup>T</sup>Wm = 1x1 <- a의 size: 2D'x1
 
-* E<sup>t</sup><sub>i,j</sub> = (e<sup>t</sup><sub>i</sub> || e<sup>t</sup><sub>j</sub>) -> size: 2D x 1
+* E<sup>t</sup><sub>i,j</sub> = (e<sup>t</sup><sub>i</sub> II e<sup>t</sup><sub>j</sub>) -> size: 2D x 1
 * 내 생각엔 E<sup>t</sup> matrix는 Nx2DxN이 되야 될 것 같은데... 이건 코드 보면서 자세히 봐보도록 하자.
 * 이런 E<sup>t</sup>을 MLP와 Gumbel Softmax에 차례로 통과시키면 G<sup>t(l)</sup>을 얻을 수 있다. 이는 binary value로 이루어진 그래프로 ij번째 값이 1이면 j번째 agent가 i번째 agent에게 t time step의 l번째 라운드에서 메시지를 보낸다는 소리이다.
 
@@ -142,12 +142,9 @@ Paper Link: [https://arxiv.org/abs/1911.10715](https://arxiv.org/abs/1911.10715)
 * N predators with limited visions searching for a stationary prey
 * Predator action: up, down, left, right, stay
 * Predator incurs a reward -0.05 for each time step until the prey is found.
-* Episode is done when all the predators find the prey before a predefined maximum time limit.
-
+* Episode is done when all the predators find the prey before a predefined maximum time limit.  
 ![image](https://user-images.githubusercontent.com/45442859/131469781-7e6e9dee-12bb-40a5-a0c1-4f0d028fadd0.png)
-
-![image](https://user-images.githubusercontent.com/45442859/131469919-75ef9578-71f8-4ff7-b128-43b2d7694f02.png)
-
+![image](https://user-images.githubusercontent.com/45442859/131469919-75ef9578-71f8-4ff7-b128-43b2d7694f02.png)  
 * Lesser communication after agent 5 first reaches the prey at step 23.
 * Other agents quickly reach the prey in the following 7 steps.
 

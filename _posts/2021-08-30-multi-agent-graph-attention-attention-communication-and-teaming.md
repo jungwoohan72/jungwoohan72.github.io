@@ -108,7 +108,32 @@ Paper Link: [https://arxiv.org/abs/1911.10715](https://arxiv.org/abs/1911.10715)
 
 * Input: 각 라운드의 directed graph G + 각 라운드의 encoded message m
 * Output: processed message m
-* 구조: GAT which takes input of {m<sup>t(l-1)</sup><sub>i</sub>}<sup>N</sup><sub>1</sub>
-
+* 구조: GAT which takes input of {m<sup>t(l-1)</sup><sub>i</sub>}<sup>N</sup><sub>1</sub>  
 ![image](https://user-images.githubusercontent.com/45442859/131343400-b61b1080-7bdc-4bb4-98ce-b101f917a80b.png)
+
+* Self-loop available 
+* calculation of the coefficient for a standard GAT layer is a non-differential operation for the graph, using above equation allows us to retain the gradient of g<sup>t(l)</sup><sub>ij</sub>.
+* Message Processor에서 g까지 end-to-end로 training 시키면 scheduler을 업데이트하기 위해 별도의 loss function을 정의해줘야하는 수고를 덜 수 있다.
+* 각 round의 message는 아래와 같이 얻을 수 있다.  
+![image](https://user-images.githubusercontent.com/45442859/131453231-86a8a919-96ca-4295-94bd-2d1aa54cf57c.png)
+
+# Training
+
+* Policy network에서 FC layer와 LSTM의 parameter는 training efficiency를 위해 공유한다.
+* Multi-threaded synchronous multi-agent policy gradient -> A3C 성능이 안 좋아서 그런건가?
+* Policy를 학습하면서 baseline으로 사용되는 value function도 monte-carlo estimate과 최대한 가깝게 update 함.
+* Policy head와 value head는 parameter를 공유하지 않음.
+* Loss function은 아래와 같음
+
+![image](https://user-images.githubusercontent.com/45442859/131457840-bb74f4dd-a9e2-4671-87bb-2ba6e19100dd.png)
+
+* Different thread는 &theta;와 pi를 공유해서 각각 gradient를 계산하고 batch마다 synchronously accumulate 함.
+
+# Pseudocode
+
+![image](https://user-images.githubusercontent.com/45442859/131458559-81151aa0-284a-49a4-9d91-f16e3bb6ac28.png)
+
+* Step 15&16: Determine action probability distribution from the policy and sample the action
+
+# Evaluation Environment
 

@@ -7,9 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../RL_practice/DDPG/DDPG.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-30-multi-agent-graph-attention-attention-communication-and-teaming.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-30-multi-agent-graph-attention-attention-communication-and-teaming.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-27-DDPG.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-27-DDPG.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627907254004</updated>
-      <workItem from="1630398316152" duration="1191000" />
+      <workItem from="1630398316152" duration="1213000" />
     </task>
     <task id="LOCAL-00001" summary="Multi-agent communication">
       <created>1630399087907</created>
@@ -69,7 +67,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630399087907</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Multi-agent communication">
+      <created>1630399511633</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1630399511633</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

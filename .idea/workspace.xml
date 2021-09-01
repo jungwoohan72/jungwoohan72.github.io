@@ -7,16 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/DDPG.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/MLP.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/ReplayBuffer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/train.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_posts/2021-09-01-openai-tips.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RL_practice/DDPG/DDPG.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/DDPG/DDPG.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/DDPG.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/DDPG.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2009-09-05-edge-case-no-yaml-title.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-31-tips.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-31-conda-tips.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +108,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627907254004</updated>
-      <workItem from="1630398316152" duration="18145000" />
+      <workItem from="1630398316152" duration="18638000" />
     </task>
     <task id="LOCAL-00001" summary="Multi-agent communication">
       <created>1630399087907</created>
@@ -152,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630406101755</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="RL Study">
+      <created>1630483482819</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1630483482819</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +161,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Multi-agent communication" />
     <MESSAGE value="DDPG" />
-    <option name="LAST_COMMIT_MESSAGE" value="DDPG" />
+    <MESSAGE value="RL Study" />
+    <option name="LAST_COMMIT_MESSAGE" value="RL Study" />
   </component>
 </project>

@@ -2,6 +2,7 @@
 title: Conda 명령어
 layout: post
 categories: Blog
+comments: true
 ---
 
 1. 새로운 가상환경: conda create -m "env name" python="python version"

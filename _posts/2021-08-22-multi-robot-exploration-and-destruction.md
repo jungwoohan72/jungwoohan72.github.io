@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Multi-Robot Dynamic Task Allocation for Exploration and Destruction
+comments: true
 categories:
   - Papers Explained
 tags:

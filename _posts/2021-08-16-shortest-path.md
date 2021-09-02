@@ -1,6 +1,7 @@
 ---
 title: Shortest Path
 layout: post
+comments: true
 categories:
   - Algorithm Explained
 tags:

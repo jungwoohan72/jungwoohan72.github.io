@@ -2,6 +2,7 @@
 title: OpenAI gym tip
 layout: post
 categories: Blog
+comments: true
 ---
 
 1. State와 Action Space 확인  

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Multi-Agent Graph-Attention Communication and Teaming
+comments: true
 categories:
   - Papers Explained
 tags:

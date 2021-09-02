@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 구현 (Implementation)
+comments: true
 categories:
   - Algorithm Explained
 tags:

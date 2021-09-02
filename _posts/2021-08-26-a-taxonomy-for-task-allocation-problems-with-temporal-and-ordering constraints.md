@@ -1,6 +1,7 @@
 ---
 layout: post
 title: A taxonomy for task allocation problems with temporal and ordering constraints
+comments: true
 categories:
   - Papers Explained
 tags:

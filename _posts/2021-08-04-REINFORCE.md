@@ -1,6 +1,7 @@
 ---
 layout: post
 title: REINFORCE Algorithm
+comments: true
 categories:
   - RL Algorithm Replication
 tags:

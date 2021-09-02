@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Tasks with Cost Growing over Time and Agent Reallocation Delays
+comments: true
 categories:
   - Papers Explained
 tags:

@@ -8,79 +8,50 @@
   <component name="ChangeListManager">
     <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/01/ef02269765a2d1dbe99fdaf95c36f8e52986f835eaaf1751046351d76c9e7f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/09/7e91eddb8ccf9bed9e14f09694b35aac497f4dc59ff77dfaf924653e42a67a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/09/8b68a31646cd7f521b4b105715edd9b3531ea6a0aaa7c78ad310640d4bb216" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/0a/700158fcc391d179999e6144f3cb1ae3e6164e5707e67dc1941ad648bf7c21" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/0e/960efd144eaa458329431d99b4a1fd3f514d58873e5ddbe0e4fa92a86f6e9b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/34/2509f25514769758997da5b238f55d34108bee2f10007cb778778cff579202" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/38/69271901a55ba8cc510d3afe8aab1065ab2ecf7c4c8cb42599b96b14ffd637" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3e/24ceef82b02dfc60e4927fa629fc9d5f73af3704af392245cbcf49ed57a6bb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/43/3f274e861fb3a16d7e8e944a3aa567b662023610700c01511c2f1780c03cbb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/4b/e07fa348d732017c5551d43de41fad44a742f6e0fe8a412e470db45f0f39cd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/4f/fc221ebc68a49f7355f913b85f6fc0f4f3859e1f947ca373be693b6639064f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/50/b1858cb5457e81bf56618a3fb7c3980743e0eaca2bfdc67d937c2282e15b0a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/52/83b224c23a561b5ebc882c260666328a4a76a03486d05a556480dc48d8c320" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/55/ecc34bb0d8e42b3a00680aa7a0dcfe0ccb498645fab9f2e77f9f0359c6b9cd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/56/34f6706ee34817ca5e96a08c960bb375cc3c896124262146dbeb29c7efb965" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/5b/cf5ecaabce09247cbf7de9414317e81bad8b7c00be948fbcb7290ff324dced" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/6d/faa11b1dcbab1a1a01e64547b81b533e4a3b5d45537014ded646f62b910ada" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/7c/beea9a8b7fb1c14b6f1f5acf0ba5ff06590d1d1462b6d4eda198e51524a8d9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/8a/d7663fb48e6949c335ce9dea120906c6aeb7bace3cc61c3a80f0c9466d66a2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/91/945fd86500324b831ce304ddce4fcae4a07ba3e76cb23a60fb8b07c52a5821" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/96/fe852a860f4eca12622d4841b0ed47f8c0201f6c45229a932932a4ee35c745" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/98/4200e04dab0df952c23af44c5b3a2b94ef54543165fa415e0cfdf46a2118fc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/9f/2e5842bb87831e2adf74b307c2212cfc7da596ea7b48ba8a760915636e02b5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/a2/c8971c433b0a4d0040c58487f62dc2fedd518af8f63960454f228f3f930dd0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/a4/0e121b60f325b61beac709940e99041fbcbf86b9dc126ca60d02f3a2eab888" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ad/6df5da502d2634c7bb8d3fe96fb37828e67b5d1ac45570e9313400647a52c6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/bf/0947facc5183c4f3a51938fe526b29671b0e96cc7bff640eb8f3f0380f2044" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/c3/6020f4008de5f804cfeb77a8bfcea3b34c273f446c28e40704690b292f9645" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/c6/315d35d08d588f2bec1cfc871bfad26042a42573cd68ee1f0ad7c3a1e7d259" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/cb/55c13246d4a341ea950a5bafbcfd2d4866e111424941eb14e629534d5eda6b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/cb/73e65b4aa2626089584e27ad2cffbe0e59866869fab6fa19128e4ce1b84d34" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/e4/0ddac034eb6c166fb2e7c7225eec0765d97ee6bf0d5ac4ffc2b75a7ffbc527" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ec/b37c2aefb7fab46fd6dcf5fdeab82a4a2366bd70c3dda1b8d6e17388198b97" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ed/7981a67c4f66f7b2dc20e45066e97ccaf924e8611d96b74a4568347904e782" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ed/f8c3af7258fbe1c51dc28f538a47b0e54494aafb8e25b9e734d9b98a957ddc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/disqus.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/disqus.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-03-coding-test-tip.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-03-coding-test-tip.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-03-greedy-algorithm.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-03-greedy-algorithm.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-04-REINFORCE.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-04-REINFORCE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-05-attention.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-05-attention.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-05-implementation.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-05-implementation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-05-vaccine.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-05-vaccine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-09-dfs-bfs.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-09-dfs-bfs.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-10-actor-critic.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-10-actor-critic.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-10-sort.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-10-sort.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-14-seach.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-14-seach.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-15-dynamic-programming.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-15-dynamic-programming.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-16-shortest-path.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-16-shortest-path.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-19-ppo.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-19-ppo.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-22-multi-robot-exploration-and-destruction.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-22-multi-robot-exploration-and-destruction.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-26-a-taxonomy-for-task-allocation-problems-with-temporal-and-ordering constraints.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-26-a-taxonomy-for-task-allocation-problems-with-temporal-and-ordering constraints.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-27-DDPG.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-27-DDPG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-27-tasks-with-cost-growing-over-time-and-agent-reallocation-delays.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-27-tasks-with-cost-growing-over-time-and-agent-reallocation-delays.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-30-multi-agent-graph-attention-attention-communication-and-teaming.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-30-multi-agent-graph-attention-attention-communication-and-teaming.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-08-31-conda-tips.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-31-conda-tips.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_posts/2021-09-01-openai-tips.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-09-01-openai-tips.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2012/02/05/markup-syntax-highlighting.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2012/02/06/whats-jekyll.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2012/02/07/example-content.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2013/12/28/introducing-hyde.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/2017/06/01/hello-hydeout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/404.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/about.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/aciform/antiquarianism/arrangement/asmodeus/broder/buying/championship/chastening/disinclination/disinfection/2009/07/02/edge-case-many-categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/aciform/antiquarianism/arrangement/asmodeus/broder/buying/championship/chastening/disinclination/disinfection/2009/07/02/edge-case-many-categories.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/category/edge-case.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/category/markup.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/edge case/2009/05/15/edge-case-nested-and-mixed-lists.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/edge case/2009/06/01/edge-case-many-tags.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/03/coding-test-tip.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/03/coding-test-tip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/03/greedy-algorithm.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/03/greedy-algorithm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/05/implementation.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/05/implementation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/09/dfs-bfs.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/09/dfs-bfs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/10/sort.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/10/sort.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/14/seach.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/14/seach.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/15/dynamic-programming.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/15/dynamic-programming.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/16/shortest-path.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/16/shortest-path.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/2021/08/05/vaccine.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/2021/08/05/vaccine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/2021/08/31/conda-tips.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/2021/08/31/conda-tips.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/2021/09/01/openai-tips.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/2021/09/01/openai-tips.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/edge case/2009/08/06/edge-case-no-body-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/edge case/2009/08/06/edge-case-no-body-content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/edge case/2009/09/05/edge-case-no-yaml-title.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/edge case/2009/10/05/edge-case-title-should-not-overflow-the-content-area.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/edge case/2009/10/05/edge-case-very-long-title.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/layout/2012/02/03/layout-excerpt-generated.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/layout/2012/02/04/layout-excerpt-defined.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/markup/2012/01/11/markup-html-elements-and-formatting.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/markup/2012/01/29/markup-text-readability.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/markup/2012/01/30/markup-title-with-markup.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/markup/2012/01/31/markup-title-with-special-characters.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/media/2010/09/10/post-twitter-embeds.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/page2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page2/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/page3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page3/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/page4/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page4/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/page5/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/page5/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/post formats/2010/01/07/post-modified.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/post formats/2010/01/07/post-standard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/post formats/2010/02/05/post-quote.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/post formats/2010/06/02/post-video-youtube.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/tags.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/tags.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/05/attention.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/05/attention.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/22/multi-robot-exploration-and-destruction.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/22/multi-robot-exploration-and-destruction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/26/a-taxonomy-for-task-allocation-problems-with-temporal-and-ordering-constraints.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/26/a-taxonomy-for-task-allocation-problems-with-temporal-and-ordering-constraints.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/27/tasks-with-cost-growing-over-time-and-agent-reallocation-delays.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/27/tasks-with-cost-growing-over-time-and-agent-reallocation-delays.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/30/multi-agent-graph-attention-attention-communication-and-teaming.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/30/multi-agent-graph-attention-attention-communication-and-teaming.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/04/REINFORCE.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/04/REINFORCE.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/10/actor-critic.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/10/actor-critic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/19/ppo.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/19/ppo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/27/DDPG.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/27/DDPG.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +159,7 @@
       <option name="presentableId" value="Default" />
       <updated>1627907254004</updated>
       <workItem from="1630398316152" duration="19409000" />
-      <workItem from="1630566982383" duration="336000" />
+      <workItem from="1630566982383" duration="1190000" />
     </task>
     <task id="LOCAL-00001" summary="Multi-agent communication">
       <created>1630399087907</created>

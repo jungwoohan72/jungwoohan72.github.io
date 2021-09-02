@@ -1,6 +1,7 @@
 ---
 title: Dynamic Programming
 layout: post
+comments: true
 categories:
   - Algorithm Explained
 tags:

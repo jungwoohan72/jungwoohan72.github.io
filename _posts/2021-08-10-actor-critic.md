@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Actor-Critic (A3C)
+comments: true
 categories:
   - RL Algorithm Replication
 tags:

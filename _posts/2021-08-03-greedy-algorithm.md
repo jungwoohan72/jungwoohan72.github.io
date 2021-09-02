@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 그리디 (Greedy) 알고리즘
+comments: true
 categories:
   - Algorithm Explained
 tags:

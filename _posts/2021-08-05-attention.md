@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Attention, Learn to Solve Routing Problems!
+comments: true
 categories:
   - Papers Explained
 tags:

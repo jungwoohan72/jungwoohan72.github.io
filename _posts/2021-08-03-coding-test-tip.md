@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 코딩테스트 참고 사항
+comments: true
 categories:
   - Algorithm Explained
 tags:

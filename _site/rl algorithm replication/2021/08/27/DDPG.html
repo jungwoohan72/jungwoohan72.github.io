@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Continuous Control with Deep Reinforcement Learning (DDPG) &middot; Jungwoo Han
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Jungwoo Han
+      </a>
+    </div>
+    <p class="lead">Welcome</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about.html">About Me</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/RL_algorithm_replication.html">RL Algorithm Replication</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/algorithm_explained.html">Algorithm Explained</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/blog.html">Blog</a>
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/papers_explained.html">Papers Explained</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2021.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Continuous Control with Deep Reinforcement Learning (DDPG)</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">27 Aug 2021</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/RL_algorithm_replication.html">
+          RL Algorithm Replication
+        </a>
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>Paper link: <a href="https://arxiv.org/abs/1509.02971">https://arxiv.org/abs/1509.02971</a></p>
+
+<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>DQN의 continuous action domain 버전</li>
+  <li>Off policy Actor-critic 사용</li>
+  <li>Deterministic Policy Gradient 사용</li>
+  <li>이 논문에서 제시한 알고리즘이 dynamics에 대한 full observability를 가지고 있는 planning 알고리즘과 비슷할 정도로 좋은 성능을 보임.</li>
+  <li>Raw pixel input을 받아서 Policy를 end-to-end 학습 가능</li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<ul>
+  <li>DQN은 이산화되고 low-dimensional action space를 가진 문제만 풀 수 있었음. 왜냐하면 DQN의 policy 학습 자체가 행동가치함수를 최대화 하는 action을 찾는 방향으로 이루어졌기 때문.</li>
+  <li>위 같은 점이 왜 continuous domain에서 적용이 불가능한가?
+    <ul>
+      <li>일단 continuous domain을 이산화시키려면 무수히 많은 action space를 고려해야함. 이렇게 되면 dimension 하나가 늘어날 때마다 고려해야하는 action space의 갯수가 exponential하게 늘어나서 
+  curse of dimensionality 문제를 겪게 됨.</li>
+    </ul>
+  </li>
+  <li>DQN에서 다음과 같은 장점들을 채택해서 actor-critic method를 stabilize하고자 함
+    <ol>
+      <li>Off-policy로 모은 sample들을 모아서 replay buffer 만듬. 이럴 경우 여러 에피소드에 걸쳐 모은 sample들을 학습에 사용하기 때문에 sample 간의 correlation을 최대한 줄일 수 있음.</li>
+      <li>Target Q-network를 사용.</li>
+      <li>DQN에서 사용한 트릭들 외에도 batch normalization도 사용</li>
+    </ol>
+  </li>
+  <li>DDPG는 동일한 hyperparameter set과 network structure를 사용하여 여러 다양한 문제를 품.</li>
+</ul>
+
+<h2 id="background">Background</h2>
+
+<ol>
+  <li>일반적인 행동가치함수는 아래와 같이 표현할 수 있다.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131423574-f27e7d12-a97c-4c30-8950-0dd6a8d18f4a.png" alt="image" /></p>
+
+<ol>
+  <li>Bellman Equation을 사용하여 recursive한 form으로 표현하면 다음과 같이 표현할 수 있다.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131423635-49ddd9c7-24de-4093-ad74-52331d2aa40a.png" alt="image" /></p>
+
+<ol>
+  <li>만약 policy가 deterministic 하다면 더 이상 a<sub>t+1</sub>에 따른 행동가치함수의 기댓값을 계산 하지 않아도 됨. 기댓값을 구하는 과정은 특정 action의 확률과 해당 action을 취했을 때의 행동가치함수를 곱해서 모두 더하는데, action이 결정적이면 해당 action에 대한 행동가치함수만 고려하면 됨.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131431845-f3d5f088-8544-4b8f-b380-cb53ffb364be.png" alt="image" /></p>
+
+<ul>
+  <li>이렇게 되면 Q<sup>μ</sup>를 stochasitc behavior policy β를 통해 얻은 sample들을 통해 off-policy 학습할 수 있다.</li>
+</ul>
+
+<ol>
+  <li>Off-policy 알고리즘의 예시 중 하나로 Q-Learning을 언급하고 있기도 하다.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131432478-50fe47e6-d1f4-4c90-9a1c-c8d5f03e19ad.png" alt="image" /></p>
+
+<h2 id="algorithm">Algorithm</h2>
+
+<ul>
+  <li>Actor-critic approach based on the DPG algorithm</li>
+  <li>DPG 알고리즘은 actor function μ(sIθ<sup>μ</sup>)을 사용하여 state를 특정 action으로 deterministically mapping 한다.</li>
+  <li>Actor function은 다음과 같은 policy gradient 방법을 사용하여 update 한다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131443050-9fb4d468-528e-487e-b6f0-0923f6e17f57.png" alt="image" /></p>
+
+<ul>
+  <li>Critic은 Bellman equation을 사용한 Q-Learning 알고리즘을 통해 학습한다.</li>
+  <li>대부분의 최적화 알고리즘이 그렇듯 neural network를 강화학습에 사용하기 위해서는 sample들이 independently and identically distributed 되어야 한다는 조건이 필요하다.
+    <ul>
+      <li>DQN은 replay buffer를 사용하여 이러한 문제를 해결하고자 했다.</li>
+      <li>time step마다 minibatch를 샘플링하여 actor와 critic을 업데이트 했다.</li>
+    </ul>
+  </li>
+  <li>Q-Learning을 사용하게 되면 업데이트 하고 있는 Q function이 target network로도 사용되기 때문에 Q function이 diverge할 수도 있다는 단점이 있다.
+    <ul>
+      <li>이를 해결하기 위해 Q 함수를 그대로 복사해서 target network를 만드는 것이 아니라 “soft” target update를 사용한다.</li>
+      <li>Soft update는 θ’ &lt;- τθ + (1-τ)θ’ with τ « 1로 표현할 수 있는데 여기서 θ‘는 업데이트 전의 actor와 critic의 parameter이다. 즉 업데이트 전과 후의 parameter를 적절히 조합하여 새로운 parameter를 얻는다는 뜻이다.</li>
+      <li>이 같은 방법을 사용하면 update를 천천히, 그리고 안정적으로 진행할 수 있다. 업데이트가 천천히 진행된다는 단점이 있을 수 있지만, 안정성 측면에서 그만큼의 효과를 내고 있다고 설명하고 있다.</li>
+    </ul>
+  </li>
+  <li>Low-dimensional feature vector observation을 사용하게 되면, 각 observation이 unit이 다르거나 scale이 다른 경우가 발생할 수 있다. 이를 해결하기 위해 batch normalization을 사용한다.
+    <ul>
+      <li>Minibatch의 sample들이 unit mean and variance를 가지도록 normalize</li>
+      <li>State input, all layers of μ, all layers of Q network에 normalization을 진행</li>
+    </ul>
+  </li>
+  <li>Continuous dimension에서 가장 큰 문제는 exploration이다.
+    <ul>
+      <li>기존의 actor policy에 noise를 추가해줌으로써 exploration이 가능하다.<br />
+<img src="https://user-images.githubusercontent.com/45442859/131446819-45aaa56d-32fe-493f-9ff5-4570b9bae560.png" alt="image" /></li>
+      <li>DDPG에서는 Ornstein-Uhlenbeck process를 사용해서 noise를 sample 했다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="pseudocode">Pseudocode</h2>
+<p><img src="https://user-images.githubusercontent.com/45442859/131446937-d9b5f16f-d2e7-43f4-8c1f-360a927cba92.png" alt="image" /></p>
+
+<h2 id="results">Results</h2>
+
+<ul>
+  <li>Low-dimensional state description (joint angles and positions)</li>
+  <li>High-dimensional renderings of the environment</li>
+  <li>For each timestep, step the simulation 3 timesteps, rendering each time.</li>
+  <li>Observation reported to the agent contains 9 feature maps (RGP of each of the 3 renderings) which allows to infer velocieis using the differences between frames.</li>
+  <li>Frames were downsampled to 64 x 64 pixels and the 8-bit RGB values were converted to floating point scaled to [0,1]</li>
+  <li>Test 시에는 explorating noise를 제외한 policy를 사용.</li>
+</ul>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#rl">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">RL</span>
+    </a>
+  
+    
+    <a href="/tags.html#policy-gradient">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Policy gradient</span>
+    </a>
+  
+    
+    <a href="/tags.html#ddpg">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">DDPG</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <p>
+    You are seeing this because your Disqus shortname is not properly set. To
+    configure Disqus, you should edit your <code>_config.yml</code> to include
+    either a <code>disqus.shortname</code> variable.
+  </p>
+
+  <p>
+    If you do not wish to use Disqus, override the
+    <code>comments.html</code> partial for this theme.
+  </p>
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/09/01/openai-tips.html">
+            OpenAI gym tip
+            <small>01 Sep 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/08/31/conda-tips.html">
+            Conda 명령어
+            <small>31 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/papers%20explained/2021/08/30/multi-agent-graph-attention-attention-communication-and-teaming.html">
+            Multi-Agent Graph-Attention Communication and Teaming
+            <small>30 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

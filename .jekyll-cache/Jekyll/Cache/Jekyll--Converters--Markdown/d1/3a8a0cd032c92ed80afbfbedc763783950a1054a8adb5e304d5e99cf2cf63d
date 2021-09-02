@@ -1,0 +1,141 @@
+I"�.<h2 id="stack">Stack</h2>
+
+<ul>
+  <li>선입후출 (First In Last Out)</li>
+  <li>list가 이에 해당.</li>
+  <li>append() 함수로 stack 맨 뒤에 원소 추가 가능.</li>
+  <li>pop() 함수로 stack 맨 뒤 원소 꺼내기 가능.</li>
+</ul>
+
+<h2 id="queue">Queue</h2>
+
+<ul>
+  <li>선입선출 (First In First Out)</li>
+  <li>deque가 이에 해당. 엄밀하게 따지자면 stack과 queue의 장점을 모두 채택한 것인데, 데이터를 넣고 빼는 속도가 리스트 자료형에 비해 효율적.</li>
+  <li>append() 함수로 queue 맨 뒤에 원소 추가 가능.</li>
+  <li>popleft() 함수로 queue 맨 앞의 원소 꺼내기 가능.</li>
+</ul>
+
+<h2 id="재귀함수">재귀함수</h2>
+
+<ul>
+  <li>자기 자신을 다시 호출하는 함수</li>
+  <li>무한 루프에 빠지지 않기 위해선 종료 조건이 꼭 필요함.</li>
+  <li>컴퓨터 내부에서 재귀 함수의 수행은 스택 자료구조 사용.</li>
+  <li>대표적으로 factorial 문제가 있음.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h2 id="dfs">DFS</h2>
+
+<ul>
+  <li>Depth-First Search (깊이우선탐색)</li>
+  <li>그래프는 인접 행렬 (Adjacency Matrix)와 인접 리스트 (Adjacency List)로 표현 가능함.</li>
+  <li>인접행렬 예제</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">INF</span> <span class="o">=</span> <span class="mi">99999999</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">INF</span><span class="p">]</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="n">INF</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>인접 리스트 예제</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">graph</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+
+<span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span> <span class="c1"># (연결된 노드, 거리)
+</span><span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">graph</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="n">graph</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</code></pre></div></div>
+
+<ul>
+  <li>메모리 측면에서는 인접 행렬 방식은 모든 관계를 저장하므로 노드 개수가 많을 수록 메모리가 불필요하게 낭비됨.</li>
+  <li>필요한 데이터로 접근하는 속도가 느려짐. 예를 들어, 노드 0에 노드 2가 연결되어 있는지 보고 싶으면 노드 1과 연결되어 있는지부터 차례대로 확인해야함.</li>
+  <li>DFS 동작 과정 (보통 재귀함수로 구현함)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">' '</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span>
+
+<span class="n">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>노드의 개수가 N개인 경우 O(N)의 시간이 소요 됨.</li>
+</ul>
+
+<h2 id="bfs">BFS</h2>
+<ul>
+  <li>Breadth-First Search (너비우선탐색)</li>
+  <li>인접 노드를 모두 방문하고 인접 노드들의 인접노드들을 탐색.</li>
+  <li>구현 시 deque 사용 권장.</li>
+  <li>O(N)의 시간 소요.</li>
+  <li>BFS 동작 과정</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">' '</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span>
+
+<span class="n">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
+</code></pre></div></div>
+
+:ET

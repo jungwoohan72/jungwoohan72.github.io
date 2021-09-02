@@ -1,0 +1,116 @@
+I"P<p>Paper link: <a href="https://arxiv.org/abs/1509.02971">https://arxiv.org/abs/1509.02971</a></p>
+
+<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>DQN의 continuous action domain 버전</li>
+  <li>Off policy Actor-critic 사용</li>
+  <li>Deterministic Policy Gradient 사용</li>
+  <li>이 논문에서 제시한 알고리즘이 dynamics에 대한 full observability를 가지고 있는 planning 알고리즘과 비슷할 정도로 좋은 성능을 보임.</li>
+  <li>Raw pixel input을 받아서 Policy를 end-to-end 학습 가능</li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<ul>
+  <li>DQN은 이산화되고 low-dimensional action space를 가진 문제만 풀 수 있었음. 왜냐하면 DQN의 policy 학습 자체가 행동가치함수를 최대화 하는 action을 찾는 방향으로 이루어졌기 때문.</li>
+  <li>위 같은 점이 왜 continuous domain에서 적용이 불가능한가?
+    <ul>
+      <li>일단 continuous domain을 이산화시키려면 무수히 많은 action space를 고려해야함. 이렇게 되면 dimension 하나가 늘어날 때마다 고려해야하는 action space의 갯수가 exponential하게 늘어나서 
+  curse of dimensionality 문제를 겪게 됨.</li>
+    </ul>
+  </li>
+  <li>DQN에서 다음과 같은 장점들을 채택해서 actor-critic method를 stabilize하고자 함
+    <ol>
+      <li>Off-policy로 모은 sample들을 모아서 replay buffer 만듬. 이럴 경우 여러 에피소드에 걸쳐 모은 sample들을 학습에 사용하기 때문에 sample 간의 correlation을 최대한 줄일 수 있음.</li>
+      <li>Target Q-network를 사용.</li>
+      <li>DQN에서 사용한 트릭들 외에도 batch normalization도 사용</li>
+    </ol>
+  </li>
+  <li>DDPG는 동일한 hyperparameter set과 network structure를 사용하여 여러 다양한 문제를 품.</li>
+</ul>
+
+<h2 id="background">Background</h2>
+
+<ol>
+  <li>일반적인 행동가치함수는 아래와 같이 표현할 수 있다.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131423574-f27e7d12-a97c-4c30-8950-0dd6a8d18f4a.png" alt="image" /></p>
+
+<ol>
+  <li>Bellman Equation을 사용하여 recursive한 form으로 표현하면 다음과 같이 표현할 수 있다.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131423635-49ddd9c7-24de-4093-ad74-52331d2aa40a.png" alt="image" /></p>
+
+<ol>
+  <li>만약 policy가 deterministic 하다면 더 이상 a<sub>t+1</sub>에 따른 행동가치함수의 기댓값을 계산 하지 않아도 됨. 기댓값을 구하는 과정은 특정 action의 확률과 해당 action을 취했을 때의 행동가치함수를 곱해서 모두 더하는데, action이 결정적이면 해당 action에 대한 행동가치함수만 고려하면 됨.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131431845-f3d5f088-8544-4b8f-b380-cb53ffb364be.png" alt="image" /></p>
+
+<ul>
+  <li>이렇게 되면 Q<sup>μ</sup>를 stochasitc behavior policy β를 통해 얻은 sample들을 통해 off-policy 학습할 수 있다.</li>
+</ul>
+
+<ol>
+  <li>Off-policy 알고리즘의 예시 중 하나로 Q-Learning을 언급하고 있기도 하다.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131432478-50fe47e6-d1f4-4c90-9a1c-c8d5f03e19ad.png" alt="image" /></p>
+
+<h2 id="algorithm">Algorithm</h2>
+
+<ul>
+  <li>Actor-critic approach based on the DPG algorithm</li>
+  <li>DPG 알고리즘은 actor function μ(sIθ<sup>μ</sup>)을 사용하여 state를 특정 action으로 deterministically mapping 한다.</li>
+  <li>Actor function은 다음과 같은 policy gradient 방법을 사용하여 update 한다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131443050-9fb4d468-528e-487e-b6f0-0923f6e17f57.png" alt="image" /></p>
+
+<ul>
+  <li>Critic은 Bellman equation을 사용한 Q-Learning 알고리즘을 통해 학습한다.</li>
+  <li>대부분의 최적화 알고리즘이 그렇듯 neural network를 강화학습에 사용하기 위해서는 sample들이 independently and identically distributed 되어야 한다는 조건이 필요하다.
+    <ul>
+      <li>DQN은 replay buffer를 사용하여 이러한 문제를 해결하고자 했다.</li>
+      <li>time step마다 minibatch를 샘플링하여 actor와 critic을 업데이트 했다.</li>
+    </ul>
+  </li>
+  <li>Q-Learning을 사용하게 되면 업데이트 하고 있는 Q function이 target network로도 사용되기 때문에 Q function이 diverge할 수도 있다는 단점이 있다.
+    <ul>
+      <li>이를 해결하기 위해 Q 함수를 그대로 복사해서 target network를 만드는 것이 아니라 “soft” target update를 사용한다.</li>
+      <li>Soft update는 θ’ &lt;- τθ + (1-τ)θ’ with τ « 1로 표현할 수 있는데 여기서 θ‘는 업데이트 전의 actor와 critic의 parameter이다. 즉 업데이트 전과 후의 parameter를 적절히 조합하여 새로운 parameter를 얻는다는 뜻이다.</li>
+      <li>이 같은 방법을 사용하면 update를 천천히, 그리고 안정적으로 진행할 수 있다. 업데이트가 천천히 진행된다는 단점이 있을 수 있지만, 안정성 측면에서 그만큼의 효과를 내고 있다고 설명하고 있다.</li>
+    </ul>
+  </li>
+  <li>Low-dimensional feature vector observation을 사용하게 되면, 각 observation이 unit이 다르거나 scale이 다른 경우가 발생할 수 있다. 이를 해결하기 위해 batch normalization을 사용한다.
+    <ul>
+      <li>Minibatch의 sample들이 unit mean and variance를 가지도록 normalize</li>
+      <li>State input, all layers of μ, all layers of Q network에 normalization을 진행</li>
+    </ul>
+  </li>
+  <li>Continuous dimension에서 가장 큰 문제는 exploration이다.
+    <ul>
+      <li>기존의 actor policy에 noise를 추가해줌으로써 exploration이 가능하다.<br />
+<img src="https://user-images.githubusercontent.com/45442859/131446819-45aaa56d-32fe-493f-9ff5-4570b9bae560.png" alt="image" /></li>
+      <li>DDPG에서는 Ornstein-Uhlenbeck process를 사용해서 noise를 sample 했다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="pseudocode">Pseudocode</h2>
+<p><img src="https://user-images.githubusercontent.com/45442859/131446937-d9b5f16f-d2e7-43f4-8c1f-360a927cba92.png" alt="image" /></p>
+
+<h2 id="results">Results</h2>
+
+<ul>
+  <li>Low-dimensional state description (joint angles and positions)</li>
+  <li>High-dimensional renderings of the environment</li>
+  <li>For each timestep, step the simulation 3 timesteps, rendering each time.</li>
+  <li>Observation reported to the agent contains 9 feature maps (RGP of each of the 3 renderings) which allows to infer velocieis using the differences between frames.</li>
+  <li>Frames were downsampled to 64 x 64 pixels and the 8-bit RGB values were converted to floating point scaled to [0,1]</li>
+  <li>Test 시에는 explorating noise를 제외한 policy를 사용.</li>
+</ul>
+:ET

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      구현 (Implementation) &middot; Jungwoo Han
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Jungwoo Han
+      </a>
+    </div>
+    <p class="lead">Welcome</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about.html">About Me</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/RL_algorithm_replication.html">RL Algorithm Replication</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/algorithm_explained.html">Algorithm Explained</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/blog.html">Blog</a>
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/papers_explained.html">Papers Explained</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2021.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">구현 (Implementation)</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">05 Aug 2021</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/algorithm_explained.html">
+          Algorithm Explained
+        </a>
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <h1 id="구현이란">구현이란?</h1>
+
+<ol>
+  <li>머리 속에 있는 알고리즘을 소스코드로 바꾸는 과정.</li>
+  <li>코딩에서의 피지컬이 여기에 해당.</li>
+  <li>완전탐색 (모든 경우의 수를 고려), 시뮬레이션 (문제에서 제시한 알고리즘을 한단계씩 수행) 모두 구현으로 분류</li>
+</ol>
+
+<h1 id="예제-문제">예제 문제</h1>
+
+<p>문제는 책 p118 참조.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">turn_left</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">curr</span>
+    <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">curr</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">curr</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())))</span>
+
+<span class="n">curr</span> <span class="o">=</span> <span class="n">k</span> <span class="c1"># currently facing direction
+</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">total_turn</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">graph</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">j</span><span class="o">+</span><span class="n">dy</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span><span class="o">+</span><span class="n">dy</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">i</span><span class="o">+</span><span class="n">dx</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span><span class="o">+</span><span class="n">dx</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">:</span>
+        <span class="n">turn_left</span><span class="p">()</span>
+        <span class="n">total_turn</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">continue</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">curr</span><span class="p">]][</span><span class="n">i</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">curr</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ans</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">curr</span><span class="p">]][</span><span class="n">i</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">curr</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span>
+            <span class="n">turn_left</span><span class="p">()</span>
+            <span class="n">total_turn</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">turn_left</span><span class="p">()</span>
+            <span class="n">total_turn</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">except</span> <span class="nb">IndexError</span><span class="p">:</span>
+        <span class="n">turn_left</span><span class="p">()</span>
+        <span class="n">total_turn</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">total_turn</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">dx</span><span class="p">[</span><span class="n">curr</span><span class="p">]][</span><span class="n">i</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">curr</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="n">dx</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span>
+            <span class="n">total_turn</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>머리 속에서 시뮬레이션을 잘 굴려야 풀 수 있는 문제. 중간에 한번 꼬여서 계속 헤맸다… 문제에선 외곽이 다 바다라는 조건이 주어져 있었지만 조금 더 general하게 외곽이 바다가 아닐 경우
+IndexError가 나면 예외처리 해주는 부분도 추가를 해서 코드를 작성해봤다. 예를 들어, 외곽에서 맵 밖으로 나가려고 시도하면 안 되기 때문에 그때는 IndexError를 raise하고 코드를 진행한다.</p>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#algorithm">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Algorithm</span>
+    </a>
+  
+    
+    <a href="/tags.html#implementation">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Implementation</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <p>
+    You are seeing this because your Disqus shortname is not properly set. To
+    configure Disqus, you should edit your <code>_config.yml</code> to include
+    either a <code>disqus.shortname</code> variable.
+  </p>
+
+  <p>
+    If you do not wish to use Disqus, override the
+    <code>comments.html</code> partial for this theme.
+  </p>
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/09/01/openai-tips.html">
+            OpenAI gym tip
+            <small>01 Sep 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/08/31/conda-tips.html">
+            Conda 명령어
+            <small>31 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/papers%20explained/2021/08/30/multi-agent-graph-attention-attention-communication-and-teaming.html">
+            Multi-Agent Graph-Attention Communication and Teaming
+            <small>30 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

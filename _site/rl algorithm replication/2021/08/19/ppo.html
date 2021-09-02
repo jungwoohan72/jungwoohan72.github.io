@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Proximal Policy Optimiztion (PPO) &middot; Jungwoo Han
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Jungwoo Han
+      </a>
+    </div>
+    <p class="lead">Welcome</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about.html">About Me</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/RL_algorithm_replication.html">RL Algorithm Replication</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/algorithm_explained.html">Algorithm Explained</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/blog.html">Blog</a>
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/papers_explained.html">Papers Explained</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2021.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Proximal Policy Optimiztion (PPO)</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">19 Aug 2021</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/RL_algorithm_replication.html">
+          RL Algorithm Replication
+        </a>
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>Paper Link: <a href="https://arxiv.org/abs/1707.06347">https://arxiv.org/abs/1707.06347</a></p>
+
+<ul>
+  <li>Policy Gradient 방법 중 하나로 실험 결과에서 대부분의 다른 Policy Gradient 보다 좋은 성능을 보임.</li>
+  <li>Sthocastic gradient ascent</li>
+  <li>다른 Policy gradient 알고리즘들은 minibatch 하나당 한번의 gradient 업데이트를 하고 끝내는 반면 PPO는 minibatch 하나를 여러번의 epoch에 걸쳐 사용하여 gradient를 업데이트 함.</li>
+  <li>TRPO에 비해서 구현이 비교적 쉬움.</li>
+</ul>
+
+<h1 id="다른-policy-gradient에-비해-나은-점">다른 Policy Gradient에 비해 나은 점?</h1>
+
+<ul>
+  <li>Vanilla Policy Gradient 방법들은 data efficiency 측면과 안정성 측면에서 좋지 않은 모습을 보임.</li>
+  <li>TRPO 같은 경우는 내용이 너무 복잡함.</li>
+  <li>TRPO와 달리 first-order optimization을 통해 gradient update를 진행함.</li>
+</ul>
+
+<h1 id="policy-optimization이란">Policy Optimization이란?</h1>
+
+<ul>
+  <li>
+    <p>Advantageous Actor-Critic의 loss function은 다음과 같음. Advantage function은 보통 Q(s,a)-V(s)이다. 아래 loss function을 maximize하는 방향으로 학습이 진행.
+왜 minimize가 아니고 maximize하는지 모르겠다면 REINFORCE 게시물 참조. 간단하게 말하면 아래 loss function은 value function과 같기 때문에 최대로 만들어줘야 한다.</p>
+
+    <p><img src="https://user-images.githubusercontent.com/45442859/130087533-d6a94f79-c982-4cd6-8f63-2df0d1cc8b0d.png" alt="image" /></p>
+  </li>
+  <li>
+    <p>위 loss function을 따라서 on-policy 업데이트를 계속 진행하면 REINFORCE 알고리즘에서 살펴 봤듯이 학습이 굉장히 불안정하다. 논문에서는 
+‘destructively large policy updates’라고 표현하고 있는데, gradient가 너무 급격하게 바뀌는 경우가 많기 때문인 것 같다.</p>
+  </li>
+</ul>
+
+<h1 id="trpo에서-차용한-loss-function">TRPO에서 차용한 loss function</h1>
+
+<p>TRPO의 loss function (‘surrogate’ objective)</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130090051-b53fb5ba-1959-4806-9c41-ed6ce695dd2b.png" alt="image" /></p>
+
+<p>결과론적으로 위 loss function에 gradient를 취해준 값은 Advantageous Actor-Critic의 loss function에 gradient를 취해준 값과 같은데, importance sampling을 통해 같음을 증명할 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130090951-96fbd280-872f-4644-98d0-718224988f90.png" alt="image" /></p>
+
+<p>Importance sampling은 위와 같다. 간단히 말해서 P 분포에서 sampling한 x를 input으로 가지는 f 함수의 기댓값은 P와 다른 Q 분포에서 x를 sampling 함으로써 
+구할 수 있다는 것이다.</p>
+
+<p>컨셉은 이렇고, 직접적으로 왜 같은지는 아래에서 확인할 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130091876-81fbafe7-b26b-4612-8be7-e4c8115bea23.png" alt="image" /></p>
+
+<h1 id="kl이-무엇인가">KL이 무엇인가?</h1>
+
+<p>loss function에 붙은 constraint를 살펴보면 KL이라는 것을 볼 수 있다. KL은 Kullback-Leibler divergence로 두 확률분포의 차이를 계산하는 데에 사용하는 함수이다.
+즉, 업데이트 전의 θ<sub>old</sub>와 업데이트 후의 θ의 차이나는 정도를 제한함으로써 급격한 변화를 막겠단 뜻이다. 하지만 위와 같은 constraint가 걸린 optimization 문제는
+풀기에 상당히 복잡하므로 TRPO에서는 constraint form 대신 아래와 같은 penalty form을 사용해서 optimization을 진행하는 것을 제시했다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130375721-21e07832-c99b-434f-8db8-169d40cf5801.png" alt="image" /></p>
+
+<p>하지만 TRPO는 위와 같은 penalty form 대신에 hard constraint form을 사용했는데, 이는 다양한 문제에 적용 가능한 하나의 β를 찾기 어려울 뿐 아니라 하나의 문제에서도 고정된 β 값은 성능이
+좋지 못한 것을 발견했다.</p>
+
+<h1 id="clipped-surrogate-objective">Clipped Surrogate Objective</h1>
+
+<p>위와 같은 문제를 해결하기 위해 PPO에서는 KL divergence를 쓰는 대신에 Clipped Surrogate Objective라는 modified된 loss 함수를 제시했다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130376120-7daa3180-6fc7-49ea-8817-f43bb6955e82.png" alt="image" /></p>
+
+<p>여기서 r<sub>t</sub>(θ)는 다음과 같다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130376377-5ee7bf08-32cf-417b-b1ef-7218c12c206a.png" alt="image" /></p>
+
+<p>만약 ε = 0.2 라고 한다면 clip(r<sub>t</sub>(θ), 1-ε, 1+ε)은 항상 0.8에서 1.2 사이 값을 가지게 된다. 즉 업데이트 전 policy와 업데이트 후 policy의 probability ratio를 일정 범위 안에 속하도록 고정하겠다는 의미이다.
+이렇게 clip된 값과 원래의 r<sub>t</sub>(θ) 값 중 더 작은 값을 쓰도록 하여 update가 너무 급격하게 일어나지 않게 만들어준다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130378700-cca4afbf-86e2-41a7-bcdb-379ed51d2496.png" alt="image" /></p>
+
+<p>위와 같은 clipped surrogate objective를 사용하여 update하는 과정을 살펴보면 아래와 같다. 우선 advantage가 0보다 크다는 의미는 해당 action이 좋은 action이므로 다음 번에는 해당 action을 할 확률을 올려야 된다는 소리이다.
+그래서 r 값은 증가하게 되는데 1+ε 지점에서 clip이 일어나게 된다. 아무리 정책을 좋게 만든다 하더라도 너무 급하게 바꾸지 않는다는 뜻 같다. 어찌됐던 ε이 0.2이고, advantage가 0보다 크다면 새로운 정책의 확률은
+기존 정책의 확률 보다 1.2배 이상 높아지지 못한다.</p>
+
+<p>마찬가지로 advantage가 0보다 크다는 의미는 해당 action이 나쁜 action이므로 해당 action을 할 확률을 낮춰야 한다는 의미이다. 여기서도 똑같이 1-ε에서 clip 되고, 이보다 크게 정책을 변화 시킬 수 없다.</p>
+
+<h1 id="adaptive-kl-penalty-coefficient">Adaptive KL Penalty Coefficient</h1>
+
+<p>Clipped Surrogate Objective를 loss function으로 쓰는 게 아니라 TRPO에서 제시한 것처럼 KL penalty를 쓰되, 고정된 β 값이 아니라 adaptive한 β값을 사용한다.
+하지만 논문에서 말하길, clipped surrogate objective를 쓰는 게 성능이 더 좋다고 한다. 고로 그냥 이런 게 있구나 하고 넘어가도록 하자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130473924-841d9f77-16fd-446f-acec-785f07304c4f.png" alt="image" /></p>
+
+<p>d&lt;d<sub>targ</sub>/1.5 일 경우 β를 감소시키는 것을 볼 수 있는데, d가 작다는 뜻은 기존 정책과 바뀐 정책 간의 차이가 크지 않다는 뜻이므로 penalty를 조금만 줘야한다는 뜻이 된다.
+반대로 d가 너무 크면 정책이 급격하게 바뀌었다는 뜻이므로 penalty를 크게 주어 loss function을 감소(다시 짚고 가면 우린 현재 loss function을 maximize하길 원한다)시켜 반대방향(d가 작아지도록)으로 학습이 되게 한다.</p>
+
+<h1 id="algorithm">Algorithm</h1>
+
+<p>최종적인 loss function은 아래와 같이 정의된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130555543-4f5f4450-1904-4c19-b6fc-ddc81c17b2ff.png" alt="image" /></p>
+
+<p>Loss function을 다 합쳐서 학습을 진행하는 이유는 Pytorch 등에서 제공하는 automatic differentiation을 사용하기 위해서이다. 다시 한 번 강조하자면 위 loss function을 maximize하기 위한 
+stochastic gradient algorithm을 사용한다. 맨 마지막 term은 entropy로 sufficient exploration을 위해 더해진 term이다.</p>
+
+<h2 id="pseudocode-for-training">Pseudocode for training</h2>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130555805-972e7096-8030-41f7-bfdc-5d83fd906876.png" alt="image" /></p>
+
+<ol>
+  <li>
+    <p>우선 T (episode length 보다 훨씬 작음) timestep 동안 update를 위한 sample을 모으고 advantage를 계산
+  <img src="https://user-images.githubusercontent.com/45442859/130555974-572ed068-dbf3-4820-ae44-c4cf68d4b27b.png" alt="image" />
+  <img src="https://user-images.githubusercontent.com/45442859/130556043-17d47b46-b891-4589-9121-b74b44522fa1.png" alt="image" /></p>
+  </li>
+  <li>N개의 parallel actor을 사용하여 T timestep 동안 데이터를 모음</li>
+  <li>모은 데이터에서 M 크기의 minibatch를 만들어서 K번의 epoch 동안 stochastic gradient ascent 반복함</li>
+  <li>θ<sub>old</sub>을 업데이트 된 θ로 바꿈</li>
+</ol>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>마찬가지로 팡요랩의 소스코드를 사용.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PPO</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PPO</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc_pi</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc_v</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">softmax_dim</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc_pi</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">softmax_dim</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prob</span>
+
+    <span class="k">def</span> <span class="nf">v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc_v</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span>
+
+    <span class="k">def</span> <span class="nf">put_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transition</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">transition</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">make_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s_lst</span><span class="p">,</span> <span class="n">a_lst</span><span class="p">,</span> <span class="n">r_lst</span><span class="p">,</span> <span class="n">s_prime_lst</span><span class="p">,</span> <span class="n">prob_a_lst</span><span class="p">,</span> <span class="n">done_lst</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">transition</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s_prime</span><span class="p">,</span> <span class="n">prob_a</span><span class="p">,</span> <span class="n">done</span> <span class="o">=</span> <span class="n">transition</span>
+
+            <span class="n">s_lst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">a_lst</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">])</span>
+            <span class="n">r_lst</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">r</span><span class="p">])</span>
+            <span class="n">s_prime_lst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s_prime</span><span class="p">)</span>
+            <span class="n">prob_a_lst</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">prob_a</span><span class="p">])</span>
+            <span class="n">done_mask</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">done</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">done_lst</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">done_mask</span><span class="p">])</span>
+
+        <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s_prime</span><span class="p">,</span> <span class="n">done_mask</span><span class="p">,</span> <span class="n">prob_a</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">s_lst</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">),</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">a_lst</span><span class="p">),</span> \
+                                              <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">r_lst</span><span class="p">),</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">s_prime_lst</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">),</span> \
+                                              <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">done_lst</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">),</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">prob_a_lst</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s_prime</span><span class="p">,</span> <span class="n">done_mask</span><span class="p">,</span> <span class="n">prob_a</span>
+
+    <span class="k">def</span> <span class="nf">train_net</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s_prime</span><span class="p">,</span> <span class="n">done_mask</span><span class="p">,</span> <span class="n">prob_a</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">make_batch</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K_epoch</span><span class="p">):</span>
+            <span class="n">td_target</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">s_prime</span><span class="p">)</span> <span class="o">*</span> <span class="n">done_mask</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">td_target</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">delta</span><span class="p">.</span><span class="n">detach</span><span class="p">().</span><span class="n">numpy</span><span class="p">()</span>
+
+            <span class="n">advantage_lst</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">advantage</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">for</span> <span class="n">delta_t</span> <span class="ow">in</span> <span class="n">delta</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">advantage</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">lmbda</span> <span class="o">*</span> <span class="n">advantage</span> <span class="o">+</span> <span class="n">delta_t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">advantage_lst</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">advantage</span><span class="p">])</span>
+            <span class="n">advantage_lst</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="n">advantage</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">advantage_lst</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">)</span>
+
+            <span class="n">pi</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">pi</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">softmax_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">pi_a</span> <span class="o">=</span> <span class="n">pi</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+            <span class="n">ratio</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi_a</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">prob_a</span><span class="p">))</span>  <span class="c1"># a/b == exp(log(a)-log(b))
+</span>
+            <span class="n">surr1</span> <span class="o">=</span> <span class="n">ratio</span> <span class="o">*</span> <span class="n">advantage</span>
+            <span class="n">surr2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">ratio</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">eps_clip</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">eps_clip</span><span class="p">)</span> <span class="o">*</span> <span class="n">advantage</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="n">surr1</span><span class="p">,</span> <span class="n">surr2</span><span class="p">)</span> <span class="o">+</span> <span class="n">F</span><span class="p">.</span><span class="n">smooth_l1_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">td_target</span><span class="p">.</span><span class="n">detach</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="p">.</span><span class="n">mean</span><span class="p">().</span><span class="n">backward</span><span class="p">()</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#rl">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">RL</span>
+    </a>
+  
+    
+    <a href="/tags.html#policy-gradient">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Policy gradient</span>
+    </a>
+  
+    
+    <a href="/tags.html#ppo">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">PPO</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <p>
+    You are seeing this because your Disqus shortname is not properly set. To
+    configure Disqus, you should edit your <code>_config.yml</code> to include
+    either a <code>disqus.shortname</code> variable.
+  </p>
+
+  <p>
+    If you do not wish to use Disqus, override the
+    <code>comments.html</code> partial for this theme.
+  </p>
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/09/01/openai-tips.html">
+            OpenAI gym tip
+            <small>01 Sep 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/08/31/conda-tips.html">
+            Conda 명령어
+            <small>31 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/papers%20explained/2021/08/30/multi-agent-graph-attention-attention-communication-and-teaming.html">
+            Multi-Agent Graph-Attention Communication and Teaming
+            <small>30 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

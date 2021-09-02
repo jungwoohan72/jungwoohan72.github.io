@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Actor-Critic (A3C) &middot; Jungwoo Han
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Jungwoo Han
+      </a>
+    </div>
+    <p class="lead">Welcome</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about.html">About Me</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/RL_algorithm_replication.html">RL Algorithm Replication</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/algorithm_explained.html">Algorithm Explained</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/blog.html">Blog</a>
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/papers_explained.html">Papers Explained</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2021.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Actor-Critic (A3C)</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">10 Aug 2021</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/RL_algorithm_replication.html">
+          RL Algorithm Replication
+        </a>
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>A3C Paper Link: <a href="https://arxiv.org/abs/1602.01783">https://arxiv.org/abs/1602.01783</a></p>
+
+<h1 id="actor-critic-이란">Actor-Critic 이란?</h1>
+
+<p>REINFORCE with Baseline의 update rule은 다음과 같다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128862419-41a25faa-8079-4d46-8621-35465e3a4303.png" alt="image" /></p>
+
+<p>REINFORCE의 근본적인 목표는 행동가치함수를 통해 현재의 policy를 학습하는 것인데, 이는 어떤 행동을 취하고 그 action의 행동가치함수 값이 높으면
+그 action을 할 확률을 높이도록 policy의 parameter를 조정하는 식으로 이루어진다. 하지만 Baseline으로 사용되는 상태가치함수는 위 같은 행동을 취하기 전을 기준으로 하기 때문에
+해당 action이 좋은지 나쁜지를 판단하기엔 적절하지 않다.</p>
+
+<p>또한, REINFORCE는 Monte Carlo 고유의 문제인 high variance와 episode가 끝날 때까지 기다려야 한다는 단점이 있다. return을 학습한 Q-network로부터 얻어서 step마다 업데이트 하는 것을 제안한 것이
+Actor-Critic Method이다.</p>
+
+<p>에피소드가 끝날 때까지 기다렸다가 actual return을 사용하는 게 아닌 TD(0)와 같은 추정값을 사용하는 방식이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128868704-ad371a00-4c05-451f-9cf1-9272b5031389.png" alt="image" /></p>
+
+<p>여기서 R<sub>t+1</sub>은 환경으로부터 얻은 실제값이므로 취한 action에 대한 평가가 가능해진다.
+앞에서 말했듯이, 위와 같 S<sub>t+1</sub>에서의 추정값을 사용하면 bias가 생기긴 하지만 variance 측면에서 장점이 있고, online update가 가능하는 장점이 있다.
+bias 같은 경우는 TD(1), TD(2), …와 같이 n-step return을 사용함으로써 줄일 수 있다. 
+이렇게 action의 quality를 평가하기 위해 사용되는 상태가치함수를 critic이라고 한다.</p>
+
+<h2 id="pseudocode-for-reinforce">Pseudocode for REINFORCE</h2>
+
+<p>Actor-critic과 REINFORCE의 비교를 위해 REINFORCE의 Pseudo 코드를 다시 한 번 보고 가자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128873153-4859a50c-94e3-4d59-9d07-c7a0df078159.png" alt="image" /></p>
+
+<h2 id="pseudocode-for-td-actor-critic">Pseudocode for TD actor critic</h2>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128870090-a57ee7ad-9a46-41b2-94a0-92b7cee43380.png" alt="image" /></p>
+
+<p>action을 sampling하는 현재의 policy를 actor라 칭하고, 이를 평가하는 상태가치함수를 critic이라 칭한다. 
+둘다 학습을 시켜줘야된다. TD Actor-critic은 critic으로 TD error를 사용하는 경우이다.
+Actor의 경우 경사 하강을 통해 loss function을 최소화 해줘야 하고, Critic 같은 경우는 앞에서 본 것과 같이 최대화 시켜줘야 하기 때문에 경사 상승을 이용한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+
+<span class="kn">from</span> <span class="nn">torch.distributions.categorical</span> <span class="kn">import</span> <span class="n">Categorical</span>
+
+<span class="k">class</span> <span class="nc">A2C</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy_net</span><span class="p">,</span> <span class="n">value_net</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">A2C</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">policy_net</span> <span class="o">=</span> <span class="n">policy_net</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">value_net</span> <span class="o">=</span> <span class="n">value_net</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">lr</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">policy_net</span><span class="p">.</span><span class="n">parameters</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">value_net</span><span class="p">.</span><span class="n">parameters</span><span class="p">())</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">,</span> <span class="n">lr</span> <span class="o">=</span> <span class="n">lr</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">_eps</span> <span class="o">=</span> <span class="mf">1e-25</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_mse</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">MSELoss</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+
+    <span class="k">def</span> <span class="nf">get_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">policy_net</span><span class="p">(</span><span class="n">state</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">logits</span> <span class="o">=</span> <span class="n">logits</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">dist</span><span class="p">.</span><span class="n">sample</span><span class="p">()</span> <span class="c1"># torch.Size([1])
+</span>        <span class="k">return</span> <span class="n">a</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">done</span><span class="p">):</span>
+
+        <span class="c1"># action size: torch.Size([1,1])
+</span>
+        <span class="n">next_state</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">next_state</span><span class="p">).</span><span class="nb">float</span><span class="p">().</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">next_state</span> <span class="o">=</span> <span class="n">next_state</span><span class="p">.</span><span class="n">view</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># value_net input은 size [1,4]여야 함.
+</span>        <span class="n">reward</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">reward</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">td_target</span> <span class="o">=</span> <span class="n">reward</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">value_net</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">done</span><span class="p">)</span>
+            <span class="n">td_error</span> <span class="o">=</span> <span class="n">td_target</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">value_net</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">policy_net</span><span class="p">(</span><span class="n">state</span><span class="p">))</span> <span class="c1"># torch.Size([1,2])
+</span>        <span class="n">prob</span> <span class="o">=</span> <span class="n">dist</span><span class="p">.</span><span class="n">probs</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">action</span><span class="p">)</span>
+
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">value_net</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">prob</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">_eps</span><span class="p">)</span><span class="o">*</span><span class="n">td_error</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">_mse</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">td_target</span><span class="o">*</span><span class="n">td_error</span>  <span class="c1"># policy loss + value loss / shape: torch.Size([1,1])
+</span>        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1"># shape: torch.Size([])
+</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p>TD Error의 경우 Advantage Function의 unbiased estimate이므로 Critic으로 Advantage Function을 사용하기도 한다.
+하지만 TD Error을 사용하면 Advantage Function을 사용할 때와 달리, 상태가치함수만 학습하면 된다.</p>
+
+<h2 id="pseudocode-for-q-actor-critic">Pseudocode for Q actor critic</h2>
+
+<p>Critic으로 학습한 Q function 사용</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128870844-0e8ce83f-1a74-4ddf-9a2d-964d5c8eea80.png" alt="image" /></p>
+
+<h2 id="actor-critic-종류">Actor-Critic 종류</h2>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/129993657-1aa7d106-6773-461a-ae99-e4a99db60894.png" alt="image" /></p>
+
+<h1 id="asynchronous-advantage-actor-critic">Asynchronous Advantage Actor-Critic</h1>
+
+<p>논문에서 다루는 A3C 알고리즘은 TD Actor-Critic을 Asynchronous하게 업데이트한다. 즉, Global하게 공유하는 Actor-Critic pair를 여러개의 Actor-Critic thread를 통해
+업데이트하는 과정이다. Training과 정은 TD Actor-Critic과 동일하며, 여러 개의 thread를 사용해서 비동기적으로 업데이트한다는 특징이 있다.</p>
+
+<h2 id="pseudocode-for-a3c">Pseudocode for A3C</h2>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130006230-ef9e6924-2ee9-4439-8e6f-77c656d75c83.png" alt="image" /></p>
+
+<ul>
+  <li>t는 local actor-critic thread 업데이트를 위해 사용됨.</li>
+  <li>T는 local actor-critic update의 총합. 즉, global actor-critic이 몇 번 업데이트 되었는지를 체크.</li>
+  <li>local actor-critic은 global actor-critic으로부터 parameter를 t<sub>max</sub>마다 복사해서 학습에 사용.</li>
+  <li>Loss function을 보면 TD error가 사용된 것을 볼 수 있다.</li>
+</ul>
+
+<h2 id="implementation-of-a3c">Implementation of A3C</h2>
+
+<p>Miltiprocessing을 진행해야 하기 때문에 구현을 어떻게 해야할지 감이 안 왔다. 그래서 그냥 느낌만 잡고 가기로 결정!</p>
+
+<p><a href="https://github.com/seungeunrho/minimalRL">https://github.com/seungeunrho/minimalRL</a></p>
+
+<p>강화학습 유튜버 팡요랩 님이 운영하시는 Github인데 논문 읽기 전에 관련 영상을 보고 읽으면 이해가 더 잘 된다. 추천!</p>
+
+<p>그리고 위 A3C 코드가 내가 구글링해서 본 모든 코드 중에서 가장 간결하고 논문 flow 그대로 구현한 것 같다.</p>
+
+<p>위의 Vanilla Actor-Critic과 비교했을 때 진짜 빠르고, 성능이 좋다… 신기…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="n">optim</span>
+<span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Categorical</span>
+<span class="kn">import</span> <span class="nn">torch.multiprocessing</span> <span class="k">as</span> <span class="n">mp</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Hyperparameters
+</span><span class="n">n_train_processes</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">cpu_count</span><span class="p">()</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.0002</span>
+<span class="n">update_interval</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.98</span>
+<span class="n">max_train_ep</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">max_test_ep</span> <span class="o">=</span> <span class="mi">520</span>
+
+
+<span class="k">class</span> <span class="nc">ActorCritic</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ActorCritic</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc_pi</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc_v</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">softmax_dim</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc_pi</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">softmax_dim</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prob</span>
+
+    <span class="k">def</span> <span class="nf">v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc_v</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span>
+
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">global_model</span><span class="p">,</span> <span class="n">rank</span><span class="p">):</span>
+    <span class="n">local_model</span> <span class="o">=</span> <span class="n">ActorCritic</span><span class="p">()</span>
+    <span class="n">local_model</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">global_model</span><span class="p">.</span><span class="n">state_dict</span><span class="p">())</span>
+
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">global_model</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+    <span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="s">'CartPole-v1'</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">n_epi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_train_ep</span><span class="p">):</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1"># s.shape -&gt; (4,)
+</span>        <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+            <span class="n">s_lst</span><span class="p">,</span> <span class="n">a_lst</span><span class="p">,</span> <span class="n">r_lst</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">update_interval</span><span class="p">):</span>
+                <span class="n">prob</span> <span class="o">=</span> <span class="n">local_model</span><span class="p">.</span><span class="n">pi</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">s</span><span class="p">).</span><span class="nb">float</span><span class="p">())</span> <span class="c1"># torch.size([2]) | torch.from_numpy(s).shape: torch.size([4])
+</span>                <span class="n">m</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+                <span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">sample</span><span class="p">().</span><span class="n">item</span><span class="p">()</span> <span class="c1"># int
+</span>                <span class="n">s_prime</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+                <span class="n">s_lst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="n">a_lst</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">])</span>
+                <span class="n">r_lst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="o">/</span><span class="mf">100.0</span><span class="p">)</span>
+
+                <span class="n">s</span> <span class="o">=</span> <span class="n">s_prime</span>
+                <span class="k">if</span> <span class="n">done</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+            <span class="n">s_final</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">s_prime</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">)</span> <span class="c1"># torch.size([4])
+</span>            <span class="n">R</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">done</span> <span class="k">else</span> <span class="n">local_model</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">s_final</span><span class="p">).</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">td_target_lst</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">reward</span> <span class="ow">in</span> <span class="n">r_lst</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">R</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">R</span> <span class="o">+</span> <span class="n">reward</span> <span class="c1"># n-step TD target
+</span>                <span class="n">td_target_lst</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">R</span><span class="p">])</span>
+            <span class="n">td_target_lst</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+
+            <span class="n">s_batch</span><span class="p">,</span> <span class="n">a_batch</span><span class="p">,</span> <span class="n">td_target</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">s_lst</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">),</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">a_lst</span><span class="p">),</span> \
+                <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">td_target_lst</span><span class="p">)</span> <span class="c1"># torch.size([update_interval,4]), torch.size([update_interval,1]), torch.size([update_interval,1])
+</span>            <span class="n">advantage</span> <span class="o">=</span> <span class="n">td_target</span> <span class="o">-</span> <span class="n">local_model</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">s_batch</span><span class="p">)</span>
+
+            <span class="n">pi</span> <span class="o">=</span> <span class="n">local_model</span><span class="p">.</span><span class="n">pi</span><span class="p">(</span><span class="n">s_batch</span><span class="p">,</span> <span class="n">softmax_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">pi_a</span> <span class="o">=</span> <span class="n">pi</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a_batch</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi_a</span><span class="p">)</span> <span class="o">*</span> <span class="n">advantage</span><span class="p">.</span><span class="n">detach</span><span class="p">()</span> <span class="o">+</span> \
+                <span class="n">F</span><span class="p">.</span><span class="n">smooth_l1_loss</span><span class="p">(</span><span class="n">local_model</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">s_batch</span><span class="p">),</span> <span class="n">td_target</span><span class="p">.</span><span class="n">detach</span><span class="p">())</span> <span class="c1"># torch.size([5,1])
+</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="p">.</span><span class="n">mean</span><span class="p">().</span><span class="n">backward</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">global_param</span><span class="p">,</span> <span class="n">local_param</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">global_model</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">local_model</span><span class="p">.</span><span class="n">parameters</span><span class="p">()):</span>
+                <span class="n">global_param</span><span class="p">.</span><span class="n">_grad</span> <span class="o">=</span> <span class="n">local_param</span><span class="p">.</span><span class="n">grad</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="n">local_model</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">global_model</span><span class="p">.</span><span class="n">state_dict</span><span class="p">())</span> 
+
+    <span class="n">env</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Training process {} reached maximum episode."</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">rank</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">global_model</span><span class="p">):</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="s">'CartPole-v1'</span><span class="p">)</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">print_interval</span> <span class="o">=</span> <span class="mi">20</span>
+
+    <span class="k">for</span> <span class="n">n_epi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_test_ep</span><span class="p">):</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">n_epi</span> <span class="o">&gt;</span> <span class="mi">390</span><span class="p">:</span>
+                <span class="n">env</span><span class="p">.</span><span class="n">render</span><span class="p">()</span>
+            <span class="n">prob</span> <span class="o">=</span> <span class="n">global_model</span><span class="p">.</span><span class="n">pi</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">s</span><span class="p">).</span><span class="nb">float</span><span class="p">())</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">prob</span><span class="p">).</span><span class="n">sample</span><span class="p">().</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">s_prime</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s_prime</span>
+            <span class="n">score</span> <span class="o">+=</span> <span class="n">r</span>
+
+        <span class="k">if</span> <span class="n">n_epi</span> <span class="o">%</span> <span class="n">print_interval</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">n_epi</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"# of episode :{}, avg score : {:.1f}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span>
+                <span class="n">n_epi</span><span class="p">,</span> <span class="n">score</span><span class="o">/</span><span class="n">print_interval</span><span class="p">))</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">env</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">global_model</span> <span class="o">=</span> <span class="n">ActorCritic</span><span class="p">()</span>
+    <span class="n">global_model</span><span class="p">.</span><span class="n">share_memory</span><span class="p">()</span>
+
+    <span class="n">processes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Available CPU Count:"</span><span class="p">,</span> <span class="n">n_train_processes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_train_processes</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># + 1 for test process
+</span>        <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">test</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">global_model</span><span class="p">,))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">train</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">global_model</span><span class="p">,</span> <span class="n">rank</span><span class="p">,))</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">processes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>mp.cpu_count()를 하면 돌릴 수 있는 cpu 개수가 나오는데 내껀 12개였다.</li>
+  <li>각각 actor-critic thread가 max_train_ep만큼 데이터를 수집하고, update_interval마다 global actor-critic을 업데이트하므로 
+각 local thread에서 max_train_ep/update_interval (여기선 500/5 = 100)만큼 global actor-critic을 업데이트 한다.</li>
+  <li>Local thread가 12개이므로 총 1200번의 업데이트가 이루어지는데, 그냥 vanilla actor-critic을 썼을 때보다 10배 정도 에피소드 효율이 좋은 것 같다.</li>
+</ul>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#rl">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">RL</span>
+    </a>
+  
+    
+    <a href="/tags.html#policy-gradient">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Policy gradient</span>
+    </a>
+  
+    
+    <a href="/tags.html#a2c">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">A2C</span>
+    </a>
+  
+    
+    <a href="/tags.html#a3c">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">A3C</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <p>
+    You are seeing this because your Disqus shortname is not properly set. To
+    configure Disqus, you should edit your <code>_config.yml</code> to include
+    either a <code>disqus.shortname</code> variable.
+  </p>
+
+  <p>
+    If you do not wish to use Disqus, override the
+    <code>comments.html</code> partial for this theme.
+  </p>
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/09/01/openai-tips.html">
+            OpenAI gym tip
+            <small>01 Sep 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/08/31/conda-tips.html">
+            Conda 명령어
+            <small>31 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/papers%20explained/2021/08/30/multi-agent-graph-attention-attention-communication-and-teaming.html">
+            Multi-Agent Graph-Attention Communication and Teaming
+            <small>30 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Multi-Agent Graph-Attention Communication and Teaming &middot; Jungwoo Han
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Jungwoo Han
+      </a>
+    </div>
+    <p class="lead">Welcome</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about.html">About Me</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/RL_algorithm_replication.html">RL Algorithm Replication</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/algorithm_explained.html">Algorithm Explained</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/blog.html">Blog</a>
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/papers_explained.html">Papers Explained</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2021.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Multi-Agent Graph-Attention Communication and Teaming</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">30 Aug 2021</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/papers_explained.html">
+          Papers Explained
+        </a>
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>Paper Link: <a href="https://arxiv.org/abs/1911.10715">https://arxiv.org/abs/1911.10715</a></p>
+
+<h1 id="abstract">Abstract</h1>
+
+<ul>
+  <li>언제 다른 agent와 협력할 것인가?</li>
+  <li>어떤 agent와 협력할 것인가?</li>
+  <li>어떻게 받아온 message를 처리할 것인가?</li>
+  <li>Graph-attention을 기반으로 함.</li>
+  <li>Scheduler에서 어떤 agent와 언제 협력할 것인지를 결정. Encoder 단에서 differentiable attention을 사용하여 Message Processor에 differentiable graph를 제공하여 end-to-end 학습을 가능하게 함.</li>
+  <li>Message Processor에서 Graph Attention Network를 사용하여 message를 처리</li>
+</ul>
+
+<h1 id="introduction">Introduction</h1>
+
+<ul>
+  <li>A novel graph communication protocol that determines “when” and “whom” to communicate via an end-to-end framework.</li>
+  <li>Modeling the topology of connections between agents as a dynamic directed graph that accommodates time-varying communication needs and accurately captures the relations between agents.</li>
+  <li>언제 누구와 communicate할지에 대한 정보는 scheduler의 encoder 단에서 directed graph 형태로 가공된다.</li>
+  <li>Message processor는 graph attention network를 사용하여 받은 message와 directed graph를 가공한다.</li>
+  <li>가공된 메시지들은 각 agent의 policy 학습에 쓰인다.</li>
+  <li>언제 communicate해야 좋을지에 대한 논문은 있었지만, 누구와 communicate하는지 결정하지 않고 모든 agent와 communicate 했기 때문에 computation 측면에서 낭비가 있었다. -&gt; Learning when to communicate at scale in multiagent cooperative and competitive tasks</li>
+  <li>특정 agent와 협력하는 논문도 있었지만 언제해야되는지에 대한 부분은 다루지 않았었다.</li>
+</ul>
+
+<h2 id="contribution">Contribution</h2>
+
+<ol>
+  <li>Scheduler와 Message Processor로 이루어진 novel graph-attention communication protocol 제시</li>
+  <li>Differentiable graph를 다루기 위해 Message Processor에 GAT 적용. 이 덕분에 end-to-end 학습 가능.</li>
+  <li>성능 측면에서 Prior method 능가</li>
+  <li>3대2 축구 게임 세팅에서 실제 실험 진행</li>
+</ol>
+
+<h1 id="related-work">Related Work</h1>
+
+<ul>
+  <li>Each agent observes other agents as part of the environment.</li>
+  <li>Difficult for each agent to deduce its own contribution to the team’s success</li>
+  <li>Many MARL algorithms have pursued centralized training and decentralized execution
+    <ul>
+      <li>Cooperative scheme without explicit communication channels through centralized critics</li>
+      <li>MADDPG, COMA</li>
+    </ul>
+  </li>
+  <li>MARL with communication
+    <ul>
+      <li>Agents communicate and exchange messages during execution.</li>
+      <li>DIAL builds up limited-bandwidth differentiable discrete communication channels</li>
+      <li>CommNet extends to a continuous communication protocol designed for fully cooperative tasks by receiving averaged encoded hidden states from other agents. In this case, there will be some information loss during averaging process.</li>
+      <li>IC3Net uses a gating mechanism to decide when to communicate, so it can be applied to competitive scenarios.</li>
+      <li>하지만 CommNet과 IC3Net 같이 hidden feature를 단순 평균을 내는 것은 성능 측면에서 좋지 못함.</li>
+      <li>TarMAC은 when to communicate와 whom to send message를 다루고 있지 않음.</li>
+      <li>ATOC와 SchedNet은 communication group을 manually configure한다는 단점이 있음.</li>
+    </ul>
+  </li>
+  <li>MARL using GNN
+    <ul>
+      <li>DGN employs multi-head dot-production attention</li>
+      <li>MAGNet</li>
+      <li>HAMA</li>
+      <li>G2ANet</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="method">Method</h1>
+
+<ul>
+  <li>Partially observable setting of N agents</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131297826-23c3391a-9825-4489-9f44-bb176634e219.png" alt="image" /></p>
+
+<ol>
+  <li>
+    <p>LSTM to provide hidden state in the beginning</p>
+
+    <p><img src="https://user-images.githubusercontent.com/45442859/131298069-25b41b89-3cab-4c2c-a277-67479b0b99b8.png" alt="image" /></p>
+
+    <ul>
+      <li>e()는 fully connected layer for dimension elevation</li>
+      <li>h는 hidden state from previous time step</li>
+      <li>c는 cell state from previous time step</li>
+    </ul>
+  </li>
+  <li>m<sup>t(0)</sup>은 message processing 전의 round 0 message를 의미.</li>
+  <li>Scheduler는 agent가 각 time step에 어떤 agent에게 message를 보내는지 결정</li>
+  <li>Message processor는 받은 message 처리를 맡음</li>
+  <li>Encoded message m<sup>t(l)</sup>은 sub-processor l+1과 sub-scheduler l+1에 각각 forward pass 된다.</li>
+  <li>Sub-scheduler l은 adjacency matrix G<sup>t(l)</sup>을 생성한다. 이 adjacency matrix는 directed graph로 각 agent가 각 time step t 마다 어떤 agent에게 message를 보낼지 결정한다.</li>
+  <li>Sub-processor는 sub-scheduler가 생성한 adjacency matrix 정보를 받아 integrated message set을 생성한다. 각 agent 별로 m<sup>t(l)</sup>으로 표시된 것이 message를 뜻함.</li>
+  <li>m<sup>t(L)</sup>일 경우, 즉 마지막 round of communication일 경우 FC layer를 통과하여 m<sup>t</sup>을 생성한 뒤 agent policy 결정에 쓰인다.</li>
+  <li>l&lt;L 일 경우 m<sup>t(l)</sup>은 Sub-scheduler l+1과 Sub-processor l+1의 input으로 쓰인다. (뒤에 나오는 sub-scheduler에 대한 설명을 보면 sub-scheduler l+1에는 쓰이지 않는 것 같기도…)</li>
+  <li>m<sup>t</sup>은 맨 처음 얻었던 hidden state h<sup>t</sup>와 concatenate 되어 policy head와 value head의 input feature로 사용한다.</li>
+  <li>Policy head는 FC를 씌운 뒤 softmax를 적용한 것이고, time step t에서의 action은 softmax 함수를 통과한 뒤의 distribution에서 sampling을 통해 결정된다.</li>
+  <li>Value head는 single FC layer로 이 알고리즘의 baseline으로 사용된다. (Advantage의 value function)</li>
+</ol>
+
+<h2 id="scheduler">Scheduler</h2>
+
+<ul>
+  <li>Decides when each agent should send messages and whom each agent should address messages to.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131336840-cb3f9f1b-9039-4288-a613-51ea85970a47.png" alt="image" /></p>
+
+<ul>
+  <li>각각의 sub-scheduler는 m<sup>t(0)</sup>을 input으로 받아 directed graph G<sup>t(l)</sup>을 output으로 내놓는다.</li>
+  <li>첫번째 sub-scheduler의 경우만 GAT network를 포함하고 있다. GAT는 Graph Attention Network에 나온 구조 그대로를 사용하였다.</li>
+  <li>각각의 agent에 대한 attention score는 아래와 같이 계산한다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131338335-4ef3dee8-982c-47ba-8bda-fd2a5147eeb4.png" alt="image" /></p>
+
+<ol>
+  <li>Wm = (D’xD)x(Dx1) = D’x1</li>
+  <li>Concatenation -&gt; 2D’x1 &lt;- columnwise concatenation</li>
+  <li>a<sup>T</sup>Wm = 1x1 &lt;- a의 size: 2D’x1</li>
+</ol>
+
+<ul>
+  <li>E<sup>t</sup><sub>i,j</sub> = (e<sup>t</sup><sub>i</sub> II e<sup>t</sup><sub>j</sub>) -&gt; size: 2D x 1</li>
+  <li>내 생각엔 E<sup>t</sup> matrix는 Nx2DxN이 되야 될 것 같은데… 이건 코드 보면서 자세히 봐보도록 하자.</li>
+  <li>이런 E<sup>t</sup>을 MLP와 Gumbel Softmax에 차례로 통과시키면 G<sup>t(l)</sup>을 얻을 수 있다. 이는 binary value로 이루어진 그래프로 ij번째 값이 1이면 j번째 agent가 i번째 agent에게 t time step의 l번째 라운드에서 메시지를 보낸다는 소리이다.</li>
+</ul>
+
+<h2 id="message-processor">Message Processor</h2>
+
+<ul>
+  <li>Input: 각 라운드의 directed graph G + 각 라운드의 encoded message m</li>
+  <li>Output: processed message m</li>
+  <li>
+    <p>구조: GAT which takes input of {m<sup>t(l-1)</sup><sub>i</sub>}<sup>N</sup><sub>1</sub><br />
+<img src="https://user-images.githubusercontent.com/45442859/131343400-b61b1080-7bdc-4bb4-98ce-b101f917a80b.png" alt="image" /></p>
+  </li>
+  <li>Self-loop available</li>
+  <li>calculation of the coefficient for a standard GAT layer is a non-differential operation for the graph, using above equation allows us to retain the gradient of g<sup>t(l)</sup><sub>ij</sub>.</li>
+  <li>Message Processor에서 g까지 end-to-end로 training 시키면 scheduler을 업데이트하기 위해 별도의 loss function을 정의해줘야하는 수고를 덜 수 있다.</li>
+  <li>각 round의 message는 아래와 같이 얻을 수 있다.<br />
+<img src="https://user-images.githubusercontent.com/45442859/131453231-86a8a919-96ca-4295-94bd-2d1aa54cf57c.png" alt="image" /></li>
+</ul>
+
+<h1 id="training">Training</h1>
+
+<ul>
+  <li>Policy network에서 FC layer와 LSTM의 parameter는 training efficiency를 위해 공유한다.</li>
+  <li>Multi-threaded synchronous multi-agent policy gradient -&gt; A3C 성능이 안 좋아서 그런건가?</li>
+  <li>Policy를 학습하면서 baseline으로 사용되는 value function도 monte-carlo estimate과 최대한 가깝게 update 함.</li>
+  <li>Policy head와 value head는 parameter를 공유하지 않음.</li>
+  <li>Loss function은 아래와 같음</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131457840-bb74f4dd-a9e2-4671-87bb-2ba6e19100dd.png" alt="image" /></p>
+
+<ul>
+  <li>Different thread는 θ와 pi를 공유해서 각각 gradient를 계산하고 batch마다 synchronously accumulate 함.</li>
+</ul>
+
+<h1 id="pseudocode">Pseudocode</h1>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/131458559-81151aa0-284a-49a4-9d91-f16e3bb6ac28.png" alt="image" /></p>
+
+<ul>
+  <li>Step 15&amp;16: Determine action probability distribution from the policy and sample the action</li>
+</ul>
+
+<h1 id="evaluation-environment">Evaluation Environment</h1>
+<ul>
+  <li>CommNet, IC3Net, GA-CommNet, TarMAC-IC3Net과 비교</li>
+</ul>
+
+<ol>
+  <li>Predator-Prey
+    <ul>
+      <li>N predators with limited visions searching for a stationary prey</li>
+      <li>Predator action: up, down, left, right, stay</li>
+      <li>Predator incurs a reward -0.05 for each time step until the prey is found.</li>
+      <li>Episode is done when all the predators find the prey before a predefined maximum time limit.<br />
+<img src="https://user-images.githubusercontent.com/45442859/131469781-7e6e9dee-12bb-40a5-a0c1-4f0d028fadd0.png" alt="image" />
+<img src="https://user-images.githubusercontent.com/45442859/131469919-75ef9578-71f8-4ff7-b128-43b2d7694f02.png" alt="image" /></li>
+      <li>Lesser communication after agent 5 first reaches the prey at step 23.</li>
+      <li>Other agents quickly reach the prey in the following 7 steps.</li>
+    </ul>
+  </li>
+  <li>Traffic Junction
+    <ul>
+      <li>Intersecting routes and cars with limited vision, requires communication to avoid collisions.</li>
+      <li>Cars enter the traffic junction with a probability p<sub>arrive</sub></li>
+      <li>Maximum number of cars in the environment at a specific time is denotes as N<sub>max</sub></li>
+      <li>Action is either “gas” or “brake”</li>
+      <li>The goal is to maximize the success rate (i.e. no collisions within an episode)</li>
+    </ul>
+  </li>
+</ol>
+
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#multi-agents">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Multi agents</span>
+    </a>
+  
+    
+    <a href="/tags.html#task-allocation">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Task allocation</span>
+    </a>
+  
+    
+    <a href="/tags.html#reinforcement-learning">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Reinforcement Learning</span>
+    </a>
+  
+    
+    <a href="/tags.html#marl">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">MARL</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <p>
+    You are seeing this because your Disqus shortname is not properly set. To
+    configure Disqus, you should edit your <code>_config.yml</code> to include
+    either a <code>disqus.shortname</code> variable.
+  </p>
+
+  <p>
+    If you do not wish to use Disqus, override the
+    <code>comments.html</code> partial for this theme.
+  </p>
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/09/01/openai-tips.html">
+            OpenAI gym tip
+            <small>01 Sep 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2021/08/31/conda-tips.html">
+            Conda 명령어
+            <small>31 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/papers%20explained/2021/08/27/tasks-with-cost-growing-over-time-and-agent-reallocation-delays.html">
+            Tasks with Cost Growing over Time and Agent Reallocation Delays
+            <small>27 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

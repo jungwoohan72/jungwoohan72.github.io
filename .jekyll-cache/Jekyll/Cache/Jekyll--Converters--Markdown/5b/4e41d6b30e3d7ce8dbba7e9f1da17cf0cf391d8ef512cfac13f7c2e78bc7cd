@@ -1,0 +1,276 @@
+I"�<p>A3C Paper Link: <a href="https://arxiv.org/abs/1602.01783">https://arxiv.org/abs/1602.01783</a></p>
+
+<h1 id="actor-critic-이란">Actor-Critic 이란?</h1>
+
+<p>REINFORCE with Baseline의 update rule은 다음과 같다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128862419-41a25faa-8079-4d46-8621-35465e3a4303.png" alt="image" /></p>
+
+<p>REINFORCE의 근본적인 목표는 행동가치함수를 통해 현재의 policy를 학습하는 것인데, 이는 어떤 행동을 취하고 그 action의 행동가치함수 값이 높으면
+그 action을 할 확률을 높이도록 policy의 parameter를 조정하는 식으로 이루어진다. 하지만 Baseline으로 사용되는 상태가치함수는 위 같은 행동을 취하기 전을 기준으로 하기 때문에
+해당 action이 좋은지 나쁜지를 판단하기엔 적절하지 않다.</p>
+
+<p>또한, REINFORCE는 Monte Carlo 고유의 문제인 high variance와 episode가 끝날 때까지 기다려야 한다는 단점이 있다. return을 학습한 Q-network로부터 얻어서 step마다 업데이트 하는 것을 제안한 것이
+Actor-Critic Method이다.</p>
+
+<p>에피소드가 끝날 때까지 기다렸다가 actual return을 사용하는 게 아닌 TD(0)와 같은 추정값을 사용하는 방식이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128868704-ad371a00-4c05-451f-9cf1-9272b5031389.png" alt="image" /></p>
+
+<p>여기서 R<sub>t+1</sub>은 환경으로부터 얻은 실제값이므로 취한 action에 대한 평가가 가능해진다.
+앞에서 말했듯이, 위와 같 S<sub>t+1</sub>에서의 추정값을 사용하면 bias가 생기긴 하지만 variance 측면에서 장점이 있고, online update가 가능하는 장점이 있다.
+bias 같은 경우는 TD(1), TD(2), …와 같이 n-step return을 사용함으로써 줄일 수 있다. 
+이렇게 action의 quality를 평가하기 위해 사용되는 상태가치함수를 critic이라고 한다.</p>
+
+<h2 id="pseudocode-for-reinforce">Pseudocode for REINFORCE</h2>
+
+<p>Actor-critic과 REINFORCE의 비교를 위해 REINFORCE의 Pseudo 코드를 다시 한 번 보고 가자.</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128873153-4859a50c-94e3-4d59-9d07-c7a0df078159.png" alt="image" /></p>
+
+<h2 id="pseudocode-for-td-actor-critic">Pseudocode for TD actor critic</h2>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128870090-a57ee7ad-9a46-41b2-94a0-92b7cee43380.png" alt="image" /></p>
+
+<p>action을 sampling하는 현재의 policy를 actor라 칭하고, 이를 평가하는 상태가치함수를 critic이라 칭한다. 
+둘다 학습을 시켜줘야된다. TD Actor-critic은 critic으로 TD error를 사용하는 경우이다.
+Actor의 경우 경사 하강을 통해 loss function을 최소화 해줘야 하고, Critic 같은 경우는 앞에서 본 것과 같이 최대화 시켜줘야 하기 때문에 경사 상승을 이용한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+
+<span class="kn">from</span> <span class="nn">torch.distributions.categorical</span> <span class="kn">import</span> <span class="n">Categorical</span>
+
+<span class="k">class</span> <span class="nc">A2C</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy_net</span><span class="p">,</span> <span class="n">value_net</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">A2C</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">policy_net</span> <span class="o">=</span> <span class="n">policy_net</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">value_net</span> <span class="o">=</span> <span class="n">value_net</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">lr</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">policy_net</span><span class="p">.</span><span class="n">parameters</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">value_net</span><span class="p">.</span><span class="n">parameters</span><span class="p">())</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">,</span> <span class="n">lr</span> <span class="o">=</span> <span class="n">lr</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">_eps</span> <span class="o">=</span> <span class="mf">1e-25</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_mse</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">MSELoss</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+
+    <span class="k">def</span> <span class="nf">get_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">policy_net</span><span class="p">(</span><span class="n">state</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">logits</span> <span class="o">=</span> <span class="n">logits</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">dist</span><span class="p">.</span><span class="n">sample</span><span class="p">()</span> <span class="c1"># torch.Size([1])
+</span>        <span class="k">return</span> <span class="n">a</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">done</span><span class="p">):</span>
+
+        <span class="c1"># action size: torch.Size([1,1])
+</span>
+        <span class="n">next_state</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">next_state</span><span class="p">).</span><span class="nb">float</span><span class="p">().</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">next_state</span> <span class="o">=</span> <span class="n">next_state</span><span class="p">.</span><span class="n">view</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># value_net input은 size [1,4]여야 함.
+</span>        <span class="n">reward</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">reward</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">td_target</span> <span class="o">=</span> <span class="n">reward</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">value_net</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">done</span><span class="p">)</span>
+            <span class="n">td_error</span> <span class="o">=</span> <span class="n">td_target</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">value_net</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">policy_net</span><span class="p">(</span><span class="n">state</span><span class="p">))</span> <span class="c1"># torch.Size([1,2])
+</span>        <span class="n">prob</span> <span class="o">=</span> <span class="n">dist</span><span class="p">.</span><span class="n">probs</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">action</span><span class="p">)</span>
+
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">value_net</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">prob</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">_eps</span><span class="p">)</span><span class="o">*</span><span class="n">td_error</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">_mse</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">td_target</span><span class="o">*</span><span class="n">td_error</span>  <span class="c1"># policy loss + value loss / shape: torch.Size([1,1])
+</span>        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1"># shape: torch.Size([])
+</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p>TD Error의 경우 Advantage Function의 unbiased estimate이므로 Critic으로 Advantage Function을 사용하기도 한다.
+하지만 TD Error을 사용하면 Advantage Function을 사용할 때와 달리, 상태가치함수만 학습하면 된다.</p>
+
+<h2 id="pseudocode-for-q-actor-critic">Pseudocode for Q actor critic</h2>
+
+<p>Critic으로 학습한 Q function 사용</p>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/128870844-0e8ce83f-1a74-4ddf-9a2d-964d5c8eea80.png" alt="image" /></p>
+
+<h2 id="actor-critic-종류">Actor-Critic 종류</h2>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/129993657-1aa7d106-6773-461a-ae99-e4a99db60894.png" alt="image" /></p>
+
+<h1 id="asynchronous-advantage-actor-critic">Asynchronous Advantage Actor-Critic</h1>
+
+<p>논문에서 다루는 A3C 알고리즘은 TD Actor-Critic을 Asynchronous하게 업데이트한다. 즉, Global하게 공유하는 Actor-Critic pair를 여러개의 Actor-Critic thread를 통해
+업데이트하는 과정이다. Training과 정은 TD Actor-Critic과 동일하며, 여러 개의 thread를 사용해서 비동기적으로 업데이트한다는 특징이 있다.</p>
+
+<h2 id="pseudocode-for-a3c">Pseudocode for A3C</h2>
+
+<p><img src="https://user-images.githubusercontent.com/45442859/130006230-ef9e6924-2ee9-4439-8e6f-77c656d75c83.png" alt="image" /></p>
+
+<ul>
+  <li>t는 local actor-critic thread 업데이트를 위해 사용됨.</li>
+  <li>T는 local actor-critic update의 총합. 즉, global actor-critic이 몇 번 업데이트 되었는지를 체크.</li>
+  <li>local actor-critic은 global actor-critic으로부터 parameter를 t<sub>max</sub>마다 복사해서 학습에 사용.</li>
+  <li>Loss function을 보면 TD error가 사용된 것을 볼 수 있다.</li>
+</ul>
+
+<h2 id="implementation-of-a3c">Implementation of A3C</h2>
+
+<p>Miltiprocessing을 진행해야 하기 때문에 구현을 어떻게 해야할지 감이 안 왔다. 그래서 그냥 느낌만 잡고 가기로 결정!</p>
+
+<p><a href="https://github.com/seungeunrho/minimalRL">https://github.com/seungeunrho/minimalRL</a></p>
+
+<p>강화학습 유튜버 팡요랩 님이 운영하시는 Github인데 논문 읽기 전에 관련 영상을 보고 읽으면 이해가 더 잘 된다. 추천!</p>
+
+<p>그리고 위 A3C 코드가 내가 구글링해서 본 모든 코드 중에서 가장 간결하고 논문 flow 그대로 구현한 것 같다.</p>
+
+<p>위의 Vanilla Actor-Critic과 비교했을 때 진짜 빠르고, 성능이 좋다… 신기…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="n">optim</span>
+<span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Categorical</span>
+<span class="kn">import</span> <span class="nn">torch.multiprocessing</span> <span class="k">as</span> <span class="n">mp</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Hyperparameters
+</span><span class="n">n_train_processes</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">cpu_count</span><span class="p">()</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.0002</span>
+<span class="n">update_interval</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.98</span>
+<span class="n">max_train_ep</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">max_test_ep</span> <span class="o">=</span> <span class="mi">520</span>
+
+
+<span class="k">class</span> <span class="nc">ActorCritic</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ActorCritic</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc_pi</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc_v</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">softmax_dim</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc_pi</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">softmax_dim</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prob</span>
+
+    <span class="k">def</span> <span class="nf">v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc_v</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span>
+
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">global_model</span><span class="p">,</span> <span class="n">rank</span><span class="p">):</span>
+    <span class="n">local_model</span> <span class="o">=</span> <span class="n">ActorCritic</span><span class="p">()</span>
+    <span class="n">local_model</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">global_model</span><span class="p">.</span><span class="n">state_dict</span><span class="p">())</span>
+
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">global_model</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+    <span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="s">'CartPole-v1'</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">n_epi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_train_ep</span><span class="p">):</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1"># s.shape -&gt; (4,)
+</span>        <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+            <span class="n">s_lst</span><span class="p">,</span> <span class="n">a_lst</span><span class="p">,</span> <span class="n">r_lst</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">update_interval</span><span class="p">):</span>
+                <span class="n">prob</span> <span class="o">=</span> <span class="n">local_model</span><span class="p">.</span><span class="n">pi</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">s</span><span class="p">).</span><span class="nb">float</span><span class="p">())</span> <span class="c1"># torch.size([2]) | torch.from_numpy(s).shape: torch.size([4])
+</span>                <span class="n">m</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+                <span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">sample</span><span class="p">().</span><span class="n">item</span><span class="p">()</span> <span class="c1"># int
+</span>                <span class="n">s_prime</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+                <span class="n">s_lst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="n">a_lst</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">])</span>
+                <span class="n">r_lst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="o">/</span><span class="mf">100.0</span><span class="p">)</span>
+
+                <span class="n">s</span> <span class="o">=</span> <span class="n">s_prime</span>
+                <span class="k">if</span> <span class="n">done</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+            <span class="n">s_final</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">s_prime</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">)</span> <span class="c1"># torch.size([4])
+</span>            <span class="n">R</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">done</span> <span class="k">else</span> <span class="n">local_model</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">s_final</span><span class="p">).</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">td_target_lst</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">reward</span> <span class="ow">in</span> <span class="n">r_lst</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">R</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">R</span> <span class="o">+</span> <span class="n">reward</span> <span class="c1"># n-step TD target
+</span>                <span class="n">td_target_lst</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">R</span><span class="p">])</span>
+            <span class="n">td_target_lst</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+
+            <span class="n">s_batch</span><span class="p">,</span> <span class="n">a_batch</span><span class="p">,</span> <span class="n">td_target</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">s_lst</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">),</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">a_lst</span><span class="p">),</span> \
+                <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">td_target_lst</span><span class="p">)</span> <span class="c1"># torch.size([update_interval,4]), torch.size([update_interval,1]), torch.size([update_interval,1])
+</span>            <span class="n">advantage</span> <span class="o">=</span> <span class="n">td_target</span> <span class="o">-</span> <span class="n">local_model</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">s_batch</span><span class="p">)</span>
+
+            <span class="n">pi</span> <span class="o">=</span> <span class="n">local_model</span><span class="p">.</span><span class="n">pi</span><span class="p">(</span><span class="n">s_batch</span><span class="p">,</span> <span class="n">softmax_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">pi_a</span> <span class="o">=</span> <span class="n">pi</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a_batch</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi_a</span><span class="p">)</span> <span class="o">*</span> <span class="n">advantage</span><span class="p">.</span><span class="n">detach</span><span class="p">()</span> <span class="o">+</span> \
+                <span class="n">F</span><span class="p">.</span><span class="n">smooth_l1_loss</span><span class="p">(</span><span class="n">local_model</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">s_batch</span><span class="p">),</span> <span class="n">td_target</span><span class="p">.</span><span class="n">detach</span><span class="p">())</span> <span class="c1"># torch.size([5,1])
+</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="p">.</span><span class="n">mean</span><span class="p">().</span><span class="n">backward</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">global_param</span><span class="p">,</span> <span class="n">local_param</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">global_model</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">local_model</span><span class="p">.</span><span class="n">parameters</span><span class="p">()):</span>
+                <span class="n">global_param</span><span class="p">.</span><span class="n">_grad</span> <span class="o">=</span> <span class="n">local_param</span><span class="p">.</span><span class="n">grad</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="n">local_model</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">global_model</span><span class="p">.</span><span class="n">state_dict</span><span class="p">())</span> 
+
+    <span class="n">env</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Training process {} reached maximum episode."</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">rank</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">global_model</span><span class="p">):</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="s">'CartPole-v1'</span><span class="p">)</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">print_interval</span> <span class="o">=</span> <span class="mi">20</span>
+
+    <span class="k">for</span> <span class="n">n_epi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_test_ep</span><span class="p">):</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">n_epi</span> <span class="o">&gt;</span> <span class="mi">390</span><span class="p">:</span>
+                <span class="n">env</span><span class="p">.</span><span class="n">render</span><span class="p">()</span>
+            <span class="n">prob</span> <span class="o">=</span> <span class="n">global_model</span><span class="p">.</span><span class="n">pi</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">s</span><span class="p">).</span><span class="nb">float</span><span class="p">())</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">prob</span><span class="p">).</span><span class="n">sample</span><span class="p">().</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">s_prime</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s_prime</span>
+            <span class="n">score</span> <span class="o">+=</span> <span class="n">r</span>
+
+        <span class="k">if</span> <span class="n">n_epi</span> <span class="o">%</span> <span class="n">print_interval</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">n_epi</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"# of episode :{}, avg score : {:.1f}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span>
+                <span class="n">n_epi</span><span class="p">,</span> <span class="n">score</span><span class="o">/</span><span class="n">print_interval</span><span class="p">))</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">env</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">global_model</span> <span class="o">=</span> <span class="n">ActorCritic</span><span class="p">()</span>
+    <span class="n">global_model</span><span class="p">.</span><span class="n">share_memory</span><span class="p">()</span>
+
+    <span class="n">processes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Available CPU Count:"</span><span class="p">,</span> <span class="n">n_train_processes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_train_processes</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># + 1 for test process
+</span>        <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">test</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">global_model</span><span class="p">,))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">train</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">global_model</span><span class="p">,</span> <span class="n">rank</span><span class="p">,))</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">processes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>mp.cpu_count()를 하면 돌릴 수 있는 cpu 개수가 나오는데 내껀 12개였다.</li>
+  <li>각각 actor-critic thread가 max_train_ep만큼 데이터를 수집하고, update_interval마다 global actor-critic을 업데이트하므로 
+각 local thread에서 max_train_ep/update_interval (여기선 500/5 = 100)만큼 global actor-critic을 업데이트 한다.</li>
+  <li>Local thread가 12개이므로 총 1200번의 업데이트가 이루어지는데, 그냥 vanilla actor-critic을 썼을 때보다 10배 정도 에피소드 효율이 좋은 것 같다.</li>
+</ul>
+:ET

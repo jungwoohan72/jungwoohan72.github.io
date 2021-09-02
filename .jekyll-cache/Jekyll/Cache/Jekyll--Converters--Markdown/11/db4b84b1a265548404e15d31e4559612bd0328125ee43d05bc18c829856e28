@@ -1,0 +1,47 @@
+I"k<p>Multi-robot task allocation with growing completion cost and simultaneity constraints</p>
+
+<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>Completion costs change predictably over time.</li>
+  <li>Important to allocate agents to prevent tasks from growing so much that they become unsolvable.</li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<ul>
+  <li>Identical homogeneous agents</li>
+  <li>Tasks with growing completion costs can become difficult or impossible to complete later.</li>
+  <li>Two famous methods for task allocation:
+    <ul>
+      <li>Threshold based method: agents individually assess the constraints and their ability to complete each task.</li>
+      <li>Auction based method: market inspired auction methods typically require more communication and are more centralized.
+Agent with largest bidding takes the task.</li>
+    </ul>
+  </li>
+  <li>Proposed method strikes a balance between distribution and centralization.
+    <ul>
+      <li>Each agent is directed to an area by central authority, but upon reaching the destination, agents act on their own logic.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="problem-description">Problem Description</h2>
+
+<ul>
+  <li>Agent must be on a task’s location in order to apply work.</li>
+  <li>More agents than tasks since multiple agents must be assigned to a task.</li>
+  <li>
+    <p>Task는 다음과 같이 정의되는 cost를 가지고 있다.
+<img src="https://user-images.githubusercontent.com/45442859/131081908-fd828cdf-23c0-41dc-98aa-6b59f2cb1720.png" alt="image" /></p>
+
+    <ul>
+      <li>w: work per time unit per agent</li>
+      <li>h: monotonically increasing function</li>
+      <li>n: number of agents working on task i at time t</li>
+    </ul>
+  </li>
+  <li>If h(f) &gt; w x n, it means that the task is growing faster than the assigned agents can reduce it. Then, the task can never be completed.</li>
+  <li></li>
+</ul>
+:ET

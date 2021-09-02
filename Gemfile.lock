@@ -97,6 +97,7 @@ DEPENDENCIES
   jekyll-feed (~> 0.15.1)
   jekyll-gist (~> 1.5)
   jekyll-paginate (~> 1.1)
+  rexml (>= 3.2.5)
 
 BUNDLED WITH
    2.2.25

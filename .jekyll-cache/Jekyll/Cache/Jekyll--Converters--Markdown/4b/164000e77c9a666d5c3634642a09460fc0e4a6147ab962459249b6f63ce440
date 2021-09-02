@@ -1,0 +1,11 @@
+I"�<ol>
+  <li>
+    <p>State와 Action Space 확인<br />
+s_dim = env.observation_space.shape[0]<br />
+a_dim = env.action_space.n</p>
+  </li>
+  <li>
+    <p>흠</p>
+  </li>
+</ol>
+:ET

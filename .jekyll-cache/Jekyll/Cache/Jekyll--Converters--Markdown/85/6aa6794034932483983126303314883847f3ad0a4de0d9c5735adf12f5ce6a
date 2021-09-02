@@ -1,0 +1,144 @@
+I"�A<h2 id="선택-정렬">선택 정렬</h2>
+
+<ul>
+  <li>가장 작은 데이터를 선택해 맨 앞에 있는 데이터와 바꾸고, 그다음 작은 데이터를 선택해 앞에서 두 번째 데이터와 바꾸는 과정 반복</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)):</span>
+    <span class="n">min_index</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">array</span><span class="p">[</span><span class="n">min_index</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">min_index</span> <span class="o">=</span> <span class="n">j</span>
+    <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">min_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">min_index</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>시간복잡도는 약 O(N<sup>2</sup>)</li>
+</ul>
+
+<h2 id="삽입-정렬">삽입 정렬</h2>
+
+<ul>
+  <li>데이터를 하나씩 확인하며, 각 데이터를 적절한 위치에 삽입</li>
+  <li>자기 왼쪽에 있는 원소들을 다 확인해서 자기보다 크면 그 원소의 왼쪽에 삽입. 자기보다 작으면 그 자리에 유지.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>시간복잡도는 O(N<sup>2</sup>). 하지만 리스트가 어느정도 정렬되어 있는 상황에선 중첩된 for문을 전부 진행할 필요가 없기 때문에 빠르게 동작.</li>
+  <li>정렬이 거의 되어 있는 상황에서는 아래 나와 있는 퀵 정렬보다 빠르게 작동</li>
+</ul>
+
+<h2 id="퀵-정렬">퀵 정렬</h2>
+
+<ul>
+  <li>기준 데이터를 설정하고 그 기준보다 큰 데이터와 작은 데이터의 위치를 바꿈.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">end</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">start</span><span class="o">+</span><span class="mi">1</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">end</span>
+    
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">end</span> <span class="ow">and</span> <span class="n">array</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">array</span><span class="p">[</span><span class="n">pivot</span><span class="p">]:</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">right</span> <span class="o">&gt;</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">array</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">array</span><span class="p">[</span><span class="n">pivot</span><span class="p">]:</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">left</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">:</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">right</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">pivot</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">pivot</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">right</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">right</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">left</span><span class="p">]</span>
+
+    <span class="n">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">right</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">right</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 재귀함수 사용
+</span>
+<span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">array</span>
+    
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">tail</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    
+    <span class="n">left</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tail</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="p">]</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tail</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">quick_sort</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">pivot</span><span class="p">]</span> <span class="o">+</span> <span class="n">quick_sort</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+</code></pre></div></div>
+
+<ul>
+  <li>시간복잡도는 O(NlogN)</li>
+  <li>최악의 경우 시간복잡도는 O(N<sup>2</sup>)</li>
+  <li>이미 데이터가 정렬되어 있는 경우에는 매우 느리게 작동</li>
+</ul>
+
+<h2 id="계수-정렬">계수 정렬</h2>
+
+<ul>
+  <li>데이터의 개수가 N이고, 최댓값이 K일 때, K+1 크기의 리스트를 선언하고, 데이터를 하나씩 확인하며 데이터의 값과 동일한 인덱스의 데이터를 1씩
+증가시킴.</li>
+  <li>최악의 경우에도 O(N+K)의 시간복잡도를 보장함.</li>
+  <li>따라서 가장 큰 데이터와 가장 작은 데이터의 차이가 1,000,000을 넘지 않을 때 효과적으로 사용 가능.</li>
+  <li>데이터의 범위만 한정되어 있다면 효과적으로 사용 가능.</li>
+  <li>중복되는 데이터가 많을 경우 적합.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">array</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+    <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">j</span><span class="p">]):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">' '</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h2 id="내장함수">내장함수</h2>
+
+<ul>
+  <li>sorted()는 퀵 정렬과 동작 방식이 비슷한 병합 정렬을 기반으로 만들어짐. 퀵 정렬 보다는 느리지만 최악의 경우에도 O(NlogN) 보장.</li>
+  <li>sort()의 경우 리스트를 바로 정렬. 이 밖에도 key 매개변수를 입력으로 받을 수 있는데, 이는 정렬 기준을 뜻함.</li>
+</ul>
+
+<h2 id="overall-tip">Overall Tip</h2>
+
+<ul>
+  <li>문제에서 별도의 요구가 없다면 기본 정렬 라이브러리를 사용하고, 데이터의 범위가 한정되어 있으며 더 빠르게 동작해야 할 때는 계수 정렬을 사용.</li>
+</ul>
+
+:ET

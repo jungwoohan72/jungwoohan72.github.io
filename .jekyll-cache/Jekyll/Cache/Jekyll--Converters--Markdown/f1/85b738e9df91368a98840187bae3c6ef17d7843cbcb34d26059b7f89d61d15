@@ -1,0 +1,19 @@
+I"�<p><strong>시간 복잡도 - 아래로 갈 수록 연산량 늘어남</strong></p>
+<ul>
+  <li>O(1)</li>
+  <li>O(logN)</li>
+  <li>O(N)</li>
+  <li>O(NlogN)</li>
+  <li>O(N<sup>2</sup>)</li>
+  <li>O(N<sup>3</sup>)</li>
+  <li>(2<sup>n</sup>)</li>
+</ul>
+
+<p><strong>시간 제한이 1초일 때 가능 시간 복잡도</strong></p>
+<ul>
+  <li>N의 범위가 500인 경우: 시간 복잡도 O(N<sup>3</sup>) 가능</li>
+  <li>N의 범위가 2,000인 경우: 시간 복잡도 O(N<sup>2</sup>) 가능</li>
+  <li>N의 범위가 100,000인 경우: 시간 복잡도 O(NlogN) 가능</li>
+  <li>N의 범위가 10,000,000인 경우: 시간 복잡도 O(N) 가능</li>
+</ul>
+:ET

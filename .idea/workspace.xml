@@ -7,8 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/DDPG.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/DDPG.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +26,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../RL_practice" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1wAhM9JCxgk9mmy0N9GuMfL2uyA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -108,7 +114,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627907254004</updated>
-      <workItem from="1630398316152" duration="18638000" />
+      <workItem from="1630398316152" duration="19409000" />
     </task>
     <task id="LOCAL-00001" summary="Multi-agent communication">
       <created>1630399087907</created>
@@ -152,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630483482819</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="RL Study">
+      <created>1630483995077</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1630483995077</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

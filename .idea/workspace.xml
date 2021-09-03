@@ -7,51 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../RL_practice/DDPG/DDPG.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/DDPG/DDPG.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/DDPG.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/DDPG.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/ReplayBuffer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/ReplayBuffer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/disqus.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/disqus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-03-coding-test-tip.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-03-coding-test-tip.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-03-greedy-algorithm.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-03-greedy-algorithm.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-04-REINFORCE.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-04-REINFORCE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-05-attention.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-05-attention.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-05-implementation.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-05-implementation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-05-vaccine.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-05-vaccine.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-09-dfs-bfs.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-09-dfs-bfs.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-10-actor-critic.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-10-actor-critic.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-10-sort.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-10-sort.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-14-seach.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-14-seach.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-15-dynamic-programming.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-15-dynamic-programming.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-16-shortest-path.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-16-shortest-path.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-19-ppo.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-19-ppo.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-22-multi-robot-exploration-and-destruction.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-22-multi-robot-exploration-and-destruction.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-26-a-taxonomy-for-task-allocation-problems-with-temporal-and-ordering constraints.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-26-a-taxonomy-for-task-allocation-problems-with-temporal-and-ordering constraints.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-27-DDPG.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-27-DDPG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-27-tasks-with-cost-growing-over-time-and-agent-reallocation-delays.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-27-tasks-with-cost-growing-over-time-and-agent-reallocation-delays.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-30-multi-agent-graph-attention-attention-communication-and-teaming.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-30-multi-agent-graph-attention-attention-communication-and-teaming.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-31-conda-tips.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-31-conda-tips.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-09-01-openai-tips.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-09-01-openai-tips.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/aciform/antiquarianism/arrangement/asmodeus/broder/buying/championship/chastening/disinclination/disinfection/2009/07/02/edge-case-many-categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/aciform/antiquarianism/arrangement/asmodeus/broder/buying/championship/chastening/disinclination/disinfection/2009/07/02/edge-case-many-categories.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/03/coding-test-tip.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/03/coding-test-tip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/03/greedy-algorithm.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/03/greedy-algorithm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/05/implementation.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/05/implementation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/09/dfs-bfs.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/09/dfs-bfs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/10/sort.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/10/sort.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/14/seach.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/14/seach.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/15/dynamic-programming.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/15/dynamic-programming.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/algorithm explained/2021/08/16/shortest-path.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/algorithm explained/2021/08/16/shortest-path.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/2021/08/05/vaccine.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/2021/08/05/vaccine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/2021/08/31/conda-tips.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/2021/08/31/conda-tips.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/2021/09/01/openai-tips.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/2021/09/01/openai-tips.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/edge case/2009/08/06/edge-case-no-body-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/edge case/2009/08/06/edge-case-no-body-content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/05/attention.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/05/attention.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/22/multi-robot-exploration-and-destruction.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/22/multi-robot-exploration-and-destruction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/26/a-taxonomy-for-task-allocation-problems-with-temporal-and-ordering-constraints.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/26/a-taxonomy-for-task-allocation-problems-with-temporal-and-ordering-constraints.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/27/tasks-with-cost-growing-over-time-and-agent-reallocation-delays.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/27/tasks-with-cost-growing-over-time-and-agent-reallocation-delays.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/papers explained/2021/08/30/multi-agent-graph-attention-attention-communication-and-teaming.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/papers explained/2021/08/30/multi-agent-graph-attention-attention-communication-and-teaming.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/04/REINFORCE.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/04/REINFORCE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/10/actor-critic.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/10/actor-critic.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/19/ppo.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/19/ppo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/27/DDPG.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/rl algorithm replication/2021/08/27/DDPG.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +30,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../RL_practice" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -96,10 +57,31 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager" selected="Python.train">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="DDPG (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RL_practice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/DDPG.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="DDPG" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="RL_practice" />
@@ -114,6 +96,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../RL_practice/DDPG/DDPG.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RL_practice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/models.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -143,10 +146,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="train_DQN" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RL_practice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../RL_practice/DQN" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../RL_practice/DQN/train_DQN.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.train" />
         <item itemvalue="Python.DDPG" />
+        <item itemvalue="Python.DDPG (1)" />
+        <item itemvalue="Python.models" />
+        <item itemvalue="Python.train_DQN" />
       </list>
     </recent_temporary>
   </component>
@@ -159,7 +186,8 @@
       <option name="presentableId" value="Default" />
       <updated>1627907254004</updated>
       <workItem from="1630398316152" duration="19409000" />
-      <workItem from="1630566982383" duration="1190000" />
+      <workItem from="1630566982383" duration="17637000" />
+      <workItem from="1630630357295" duration="29134000" />
     </task>
     <task id="LOCAL-00001" summary="Multi-agent communication">
       <created>1630399087907</created>

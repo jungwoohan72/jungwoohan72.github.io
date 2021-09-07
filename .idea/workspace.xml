@@ -7,7 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/train_temp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RL_practice/DDPG/pendulum/files_mu_1000.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RL_practice/DDPG/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RL_practice/DDPG/train_mp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/DDPG.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/DDPG/DDPG.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/MLP.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/DDPG/MLP.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/ReplayBuffer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/DDPG/ReplayBuffer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/DDPG/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/DDPG/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RL_practice/FetchPickAndPlace/train_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RL_practice/DDPG/train_temp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,10 +57,18 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RL_practice/DDPG/pendulum" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
-  <component name="RunManager" selected="Python.train">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../RL_practice/DDPG/pendulum" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../RL_practice/DDPG" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.train (1)">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -121,6 +137,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="train (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RL_practice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../RL_practice/DDPG" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../RL_practice/DDPG/train.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="RL_practice" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -142,34 +179,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train_DQN" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="RL_practice" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../RL_practice/DQN" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../RL_practice/DQN/train_DQN.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.train (1)" />
         <item itemvalue="Python.train" />
         <item itemvalue="Python.DDPG (1)" />
         <item itemvalue="Python.DDPG" />
         <item itemvalue="Python.models" />
-        <item itemvalue="Python.train_DQN" />
       </list>
     </recent_temporary>
   </component>
@@ -184,7 +200,7 @@
       <workItem from="1630398316152" duration="19409000" />
       <workItem from="1630566982383" duration="17637000" />
       <workItem from="1630630357295" duration="31155000" />
-      <workItem from="1630926215847" duration="4312000" />
+      <workItem from="1630926215847" duration="27903000" />
     </task>
     <task id="LOCAL-00001" summary="Multi-agent communication">
       <created>1630399087907</created>
@@ -263,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630975758814</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="RL Study">
+      <created>1630976176198</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1630976176198</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

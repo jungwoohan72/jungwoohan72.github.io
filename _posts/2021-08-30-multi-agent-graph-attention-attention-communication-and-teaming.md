@@ -143,6 +143,8 @@ Paper Link: [https://arxiv.org/abs/1911.10715](https://arxiv.org/abs/1911.10715)
 * N predators with limited visions searching for a stationary prey
 * Predator action: up, down, left, right, stay
 * Predator incurs a reward -0.05 for each time step until the prey is found.
+* State at each point in the grid is the concatenation of a one-hot vector which represents its own location and binary values indicating the presence of predator and prey at this point.
+* Observation of each agent is a concatenated array of the states of all points within the agent's vision.
 * Episode is done when all the predators find the prey before a predefined maximum time limit.  
 ![image](https://user-images.githubusercontent.com/45442859/131469781-7e6e9dee-12bb-40a5-a0c1-4f0d028fadd0.png)
 ![image](https://user-images.githubusercontent.com/45442859/131469919-75ef9578-71f8-4ff7-b128-43b2d7694f02.png)  

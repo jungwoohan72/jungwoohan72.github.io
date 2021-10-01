@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Projects
+comments: true
 categories:
   - Blog
 tags:

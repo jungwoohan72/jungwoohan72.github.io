@@ -45,7 +45,7 @@ computational cost 측면에서 이점을 가지는 solution을 찾기 위한 �
 * Each node is represented by feature **x<sub>i</sub>** which is coordinate of node **i**
 * Solution is defined as a permutation of nodes **&pi;** = (&pi;<sub>1</sub>,...,&pi;<sub>n</sub>) where 
 &pi;<sub>t</sub> &ne; &pi;<sub>t'</sub>
-* Stochastic policy for choosing next node p<sub>&theta;</sub>(**&pi;**|s) = **&prod;<sub>t=1</sub>** p<sub>&theta;</sub>(&pi;<sub>t</sub> | s,**&pi;**<sub>1:t-1</sub>)
+* Stochastic policy for choosing next node p<sub>&theta;</sub>(**&pi;**ㅣs) = **&prod;<sub>t=1</sub>** p<sub>&theta;</sub>(&pi;<sub>t</sub>ㅣs,**&pi;**<sub>1:t-1</sub>)
 
 # Attention Model
 

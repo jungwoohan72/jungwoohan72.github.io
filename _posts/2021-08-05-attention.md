@@ -41,7 +41,7 @@ computational cost 측면에서 이점을 가지는 solution을 찾기 위한 �
 
 # Problem Setting
 
-* Problem instance **s** as a graph with **n** nodes, which are fully connected (including self-connections)
+* Problem instance **s** as a fully-connected graph with **n** nodes, which are fully connected (including self-connections)
 * Each node is represented by feature **x<sub>i</sub>** which is coordinate of node **i**
 * Solution is defined as a permutation of nodes **&pi;** = (&pi;<sub>1</sub>,...,&pi;<sub>n</sub>) where 
 &pi;<sub>t</sub> &ne; &pi;<sub>t'</sub>
@@ -49,6 +49,7 @@ computational cost 측면에서 이점을 가지는 solution을 찾기 위한 �
 
 # Attention Model
 
+* 이 논문에서는 예시로 TSP 문제를 위한 Attention Model을 정의한다. 다른 문제 세팅의 경우, Model은 같으나 input, mask, decoder context만 변형하여 사용하면 된다.
 * Encoder produces embeddings of all input nodes.
 * Decoder produces the sequence **&pi;** of input nodes, one node at a time. Also, the decoder observes a mask to know which nodes have been visited.
 
@@ -66,22 +67,23 @@ Attention은 seq-to-seq 모델에 많이 쓰이는데, 한 문장을 다른 언�
 </p>
 
 * Input은 각 노드의 좌표 (2-dimensional)
-* Output은 여러 Multi-Head-Attention layer를 거친 embedding vector (128-dimensional)
-* 각 노드의 embedding과 더불어 노드들의 평균을 낸 aggregated embedding도 output으로 내줌.
+* Output은 여러 Multi-Head-Attention layer를 거친 embedding vector
+* N개의 attention layer를 거치며 각 attention layer는 2개의 sub-layer로 이루어져 있다.
+* 각 노드의 embedding과 더불어 노드들의 평균을 낸 aggregated embedding도 output으로 내줌. -> Context input to the decoder
 
 ### 각 Attention layer는 아래와 같이 구성
 
 1. 일단 Raw Input이 MLP를 거치고 나면 128-dimensional Embedding이 만들어짐. (첫번째 초록색 화살표)
 2. Embedding에 Weight matrix를 곱해서 (query, key, value) set을 만듬. Multi-Head Attention이라고 불리우는 이유는 좀 더 다양한 feature들을 고려하기 위해 (query, key, value) set을 생성할 때 
 dimension을 쪼개기 때문이다. 예를 들면 Single Head Attention으로 128x128 weight matrix를 사용해 128-dimensional vector로 project 해주는 대신에 8개의 16x128 weight matrix를 사용해서 16-dimensional vector 8개를 만들어
-나중에 합친다.
+나중에 합친다. 여기서 W<sub>Q</sub>와 W<sub>K</sub>는 d<sub>k</sub> x d<sub>h</sub>의 크기를 가지고, W<sub>V</sub>는 d<sub>v</sub> x d<sub>h</sub>의 크기를 가진다.
 
 <p align="center">
     <img src = "https://user-images.githubusercontent.com/45442859/128448124-29776d0f-6f63-42c8-a1b1-8383469d0063.png" alt = "query" width = "50%" height = "50%"/>
 </p>
 
 3. 기준이 되는 node의 query와 나머지 주변 node들의 key끼리 dot-product를 해줘서 compatibility를 계산. 예를 들면, 1번 노드에게 나머지 노드들이 얼마나 의미를 가지는가 하는
-점수를 계산해주는 과정. 너무 멀리 떨어져 있는 node의 경우 아래와 같이 처리.
+점수를 계산해주는 과정. 너무 멀리 떨어져 있는 node의 경우 아래와 같이 처리. 분모의 d<sub>k</sub> 같은 경우 normalization 효과가 있다. 
 
 <p align = "center">
     <img src = "https://user-images.githubusercontent.com/45442859/128448677-58382d71-5595-4249-a494-8106ec025a9b.png" alt = "MHA" width = "75%" height = "75%"/>
@@ -123,3 +125,25 @@ dimension을 쪼개기 때문이다. 예를 들면 Single Head Attention으로 1
 </p>
 
 ## Decoder
+
+* Inputs: Encoder Embeddings, Problem Specific Mask, Context (Embeddings for first and last node)
+* The order and coordinates of other nodes already visited are irrelevant
+* Decoder는 timestep 마다 encoder의 embedding과 해당 timestep 전에 방문한 모든 node들을 참고하여 다음 node인 &pi;<sub>t</sub>을 return 한다.
+* Decoder는 context node (c)를 그래프 embedding과 같이 사용한다.
+* Computational cost를 줄이기 context node에서의 message만 고려한다.
+* Context node에는 graph embedding, 첫번째 노드 embedding, 마지막 노드 embedding을 포함한다. 
+
+![Screenshot from 2021-10-26 19-38-32](https://user-images.githubusercontent.com/45442859/138861808-d8fa8baf-efea-463f-9f6d-d278a49d4be7.png)
+
+<p align = "center">
+    <img src = "https://user-images.githubusercontent.com/45442859/138862595-cce526c8-f200-437b-b69c-ebcc4d4e9b11.png" alt = "context node" width = "75%" height = "75%"/>
+</p>
+
+* t = 1인 경우 첫번째 노드와 마지막 노드 대신에 학습된 v<sup>1</sup>, v<sup>f</sup> 사용.
+* [.,.,.] operation은 horizontal concatenation으로 최종 context node는 3 x d<sub>h</sub> dimension을 가짐.
+* Decoder에서도 똑같이 context node를 query로 생각하고, 나머지 node embedding들을 key와 value로 생각해서 Multi-head Attention을 진행함.
+* 다만 maximal efficiency를 위해 skip-connections, batch normalization, feed-forward layer는 사용하지 않음.
+
+![Screenshot from 2021-10-26 19-58-17](https://user-images.githubusercontent.com/45442859/138864573-73bed7c5-d0a2-4e01-bddd-7a57c72a1b6a.png)
+![Screenshot from 2021-10-26 19-58-37](https://user-images.githubusercontent.com/45442859/138864643-2bb24a00-4b50-49bf-9c88-3dc294fd41e2.png)
+

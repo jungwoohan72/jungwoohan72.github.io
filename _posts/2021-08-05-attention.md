@@ -147,3 +147,24 @@ dimension을 쪼개기 때문이다. 예를 들면 Single Head Attention으로 1
 ![Screenshot from 2021-10-26 19-58-17](https://user-images.githubusercontent.com/45442859/138864573-73bed7c5-d0a2-4e01-bddd-7a57c72a1b6a.png)
 ![Screenshot from 2021-10-26 19-58-37](https://user-images.githubusercontent.com/45442859/138864643-2bb24a00-4b50-49bf-9c88-3dc294fd41e2.png)
 
+## 그래서 p<sub>&theta;</sub>(&pi;<sub>t</sub>ㅣs,**&pi;**<sub>1:t-1</sub>)는 어떻게 구할건데?
+
+* Decoder에서 나온 결과에 마지막 single attention head layer를 추가. 여기서 C = 10.
+
+![Screenshot from 2021-10-26 20-13-49](https://user-images.githubusercontent.com/45442859/138866834-19ffb338-e3e6-454a-93ee-4cec4d63e92d.png)
+![Screenshot from 2021-10-26 20-12-40](https://user-images.githubusercontent.com/45442859/138866673-4e057f2e-1038-42fd-91d4-d2dfcabbe194.png)
+![Screenshot from 2021-10-26 20-14-34](https://user-images.githubusercontent.com/45442859/138866949-54b20e0d-44a7-4ae2-860d-a292f7baf871.png)
+
+* 여기서 가장 높은 p 값을 가진 node가 다음 노드가 되고, masking된다.
+
+## REINFORCE with Greedy Rollout Baseline
+
+* b(s) is the cost of a solution from a deterministic greedy rollout of the policy defined by the best model so far.
+* Baseline의 목적은 instance s의 difficulty를 측정하는 데에 있음.
+* Harder the instance, higher the cost.
+* When performing the rollout, the solution is obtained with a greedy policy with maximum probability.
+* Freeze greedy rollout policy for every epoch (similar to freezing of the target Q-network)
+* The rollout policy is replaced with the current training policy if the improvement is significant according to a paired t-test (alpha = 5%).
+* The t-test is done on 10000 separate evalauation instance
+
+![Screenshot from 2021-10-26 21-03-15](https://user-images.githubusercontent.com/45442859/138873767-751b017c-821f-4399-ab4d-fcc2724b5ead.png)

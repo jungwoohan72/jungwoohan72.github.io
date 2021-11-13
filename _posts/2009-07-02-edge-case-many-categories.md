@@ -1,20 +1,16 @@
 ---
 layout: post
-title: "Edge Case: Many Categories"
+title: "ScheduleNet: Learn to Solve MinMax Multiple Travelling Salesman Problem"
+comments: true
 categories:
-  - aciform
-  - antiquarianism
-  - arrangement
-  - asmodeus
-  - broder
-  - buying
-  - championship
-  - chastening
-  - disinclination
-  - disinfection
+  - Papers Explained
 tags:
-  - categories
-  - edge case
+  - Multi agents
+  - Task allocation
+  - Reinforcement Learning
+  - MARL
 ---
 
-This post has many categories.
+Abstract
+
+* 

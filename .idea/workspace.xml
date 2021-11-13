@@ -24,9 +24,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="Schedulenet">
+    <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="RL Study">
+      <change beforePath="$PROJECT_DIR$/.idea/jungwoohan72.github.io.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jungwoohan72.github.io.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2009-07-02-edge-case-many-categories.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-11-13-ScheduleNet.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2021-11-13-ScheduleNet.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-11-13-ScheduleNet.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +200,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>

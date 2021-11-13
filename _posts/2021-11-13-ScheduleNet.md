@@ -71,3 +71,13 @@ tags:
 * h'<sub>ij</sub>: embeddings after TGA update (message from source node j to destination node i)
 * z<sub>ij</sub>: how valuable is node i is to node j (just like compatibility in self-attention)
 * k<sub>j</sub>: type of entity j (i.e. active worker if 1<sup>active</sup><sub>&tau;</sub> = 1)
+
+# How Type-aware Graph Attention works?
+1. "Type-aware" edge update
+    1. Context embedding c<sub>ij</sub> of edge e<sub>ij</sub>
+     
+   Compute "type-aware" edge encoding u<sub>ij</sub>
+    2. 
+   
+Using the edge encoding, compute the updated edge features and attention logit using a MI layer.
+    3. 

@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="">
+    <list default="true" id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="Schedulenet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2021-08-05-attention.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-08-05-attention.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2009-07-02-edge-case-many-categories.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-11-13-ScheduleNet.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +199,10 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="7c8eccb9-c186-49e5-872b-a23434b21155" name="Default Changelist" comment="" />
@@ -301,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635246127232</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Schedulenet">
+      <created>1636796868709</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1636796868709</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,6 +352,13 @@
     <MESSAGE value="DDPG" />
     <MESSAGE value="RL Study" />
     <MESSAGE value="Homepage" />
-    <option name="LAST_COMMIT_MESSAGE" value="Homepage" />
+    <MESSAGE value="Schedulenet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Schedulenet" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2" timestamp="1636797056909">
+      <screen x="0" y="25" width="1440" height="793" />
+    </state>
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.25.1440.793@0.25.1440.793" timestamp="1636797056909" />
   </component>
 </project>

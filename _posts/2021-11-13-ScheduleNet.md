@@ -61,10 +61,10 @@ tags:
 <img width="550" alt="스크린샷 2021-11-13 오후 7 38 55" src="https://user-images.githubusercontent.com/45442859/141615446-3af13180-8f06-4a26-bdb9-6eca5f29834d.png">
 
 * Whenever event occurs, contruct graph as shown above.
-* edge feature is the Euclidean distance between two nodes
-* h<sub>i</sub>: node embedding
-* h<sub>ij</sub>: edge embedding 
-* single iteration of TGA embedding consists of three phases: (1) edge update (2) message aggregation (3) node update
+* Edge feature is the Euclidean distance between two nodes
+* h<sub>i</sub>: node embedding (maybe node coordinate?)
+* h<sub>ij</sub>: edge embedding (high-dim conversion of Euclidean distance)
+* Single iteration of TGA embedding consists of three phases: (1) edge update (2) message aggregation (3) node update
 
     <img width="176" alt="스크린샷 2021-11-13 오후 8 15 03" src="https://user-images.githubusercontent.com/45442859/141634414-a082e975-0d4b-4a7f-af30-9b8e39a0b247.png">
 
@@ -73,9 +73,17 @@ tags:
 * k<sub>j</sub>: type of entity j (i.e. active worker if 1<sup>active</sup><sub>&tau;</sub> = 1)
 
 # How Type-aware Graph Attention works?
-1. "Type-aware" edge update
-    1. Context embedding c<sub>ij</sub> of edge e<sub>ij</sub>
-     
+1. "Type-aware" edge update  
+&nbsp;&nbsp;&nbsp;&nbsp;i. Context embedding c<sub>ij</sub> of edge e<sub>ij</sub>  
+&nbsp;&nbsp;&nbsp;&nbsp;![Screenshot from 2021-11-15 14-27-11](https://user-images.githubusercontent.com/45442859/141727321-5bee78aa-c81c-4b34-963b-a3f443539540.png)  
+&nbsp;&nbsp;&nbsp;&nbsp;* Source node j의 종류에 따라 context node Embedding 달라짐.
+
+&nbsp;&nbsp;&nbsp;&nbsp;ii. Type-aware edge encoding  
+&nbsp;&nbsp;&nbsp;&nbsp;![Screenshot from 2021-11-15 14-43-35](https://user-images.githubusercontent.com/45442859/141728693-0311320f-1b34-4c0a-af40-58b8c8feab14.png)  
+&nbsp;&nbsp;&nbsp;&nbsp;* MI layer dynamically generates its parameter depending on the context c<sub>ij</sub>  
+&nbsp;&nbsp;&nbsp;&nbsp;* Dynamic edge feature which varies depending on the source node type.
+
+
    Compute "type-aware" edge encoding u<sub>ij</sub>
     2. 
    

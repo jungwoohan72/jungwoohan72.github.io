@@ -85,8 +85,13 @@ tags:
 
    iii. Type-aware edge encoding
    ![Screenshot from 2021-11-15 14-53-30](https://user-images.githubusercontent.com/45442859/141729548-efdc586c-8286-43dc-b71e-8426019848a5.png)
-   
+   * Upper one is for TGA<sub>E</sub>
+   * Lower one is for TGA<sub>A</sub>
 
+2. Message Aggregation
+   i. k type 별로 따로따로 attention score 구함.
+   ![Screenshot from 2021-11-15 15-01-54](https://user-images.githubusercontent.com/45442859/141730343-9a79d2be-12cf-416a-853a-94e5a9043efb.png)
+   
 
 Using the edge encoding, compute the updated edge features and attention logit using a MI layer.
     3. 

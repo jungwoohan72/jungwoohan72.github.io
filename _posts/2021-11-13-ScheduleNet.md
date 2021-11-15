@@ -74,13 +74,13 @@ tags:
 
 # How Type-aware Graph Attention works?
 1. "Type-aware" edge update  
-&nbsp;&nbsp;&nbsp;&nbsp;i. Context embedding c<sub>ij</sub> of edge e<sub>ij</sub>  
-&nbsp;&nbsp;&nbsp;&nbsp;![Screenshot from 2021-11-15 14-27-11](https://user-images.githubusercontent.com/45442859/141727321-5bee78aa-c81c-4b34-963b-a3f443539540.png)  
+&nbsp;&nbsp;&nbsp;&nbsp;i. Context embedding c<sub>ij</sub> of edge e<sub>ij</sub>
+&nbsp;&nbsp;&nbsp;&nbsp;![Screenshot from 2021-11-15 14-27-11](https://user-images.githubusercontent.com/45442859/141727321-5bee78aa-c81c-4b34-963b-a3f443539540.png)
 &nbsp;&nbsp;&nbsp;&nbsp;* Source node j의 종류에 따라 context node Embedding 달라짐.
 
-&nbsp;&nbsp;&nbsp;&nbsp;ii. Type-aware edge encoding  
-&nbsp;&nbsp;&nbsp;&nbsp;![Screenshot from 2021-11-15 14-43-35](https://user-images.githubusercontent.com/45442859/141728693-0311320f-1b34-4c0a-af40-58b8c8feab14.png)  
-&nbsp;&nbsp;&nbsp;&nbsp;* MI layer dynamically generates its parameter depending on the context c<sub>ij</sub>  
+&nbsp;&nbsp;&nbsp;&nbsp;ii. Type-aware edge encoding
+&nbsp;&nbsp;&nbsp;&nbsp;![Screenshot from 2021-11-15 14-43-35](https://user-images.githubusercontent.com/45442859/141728693-0311320f-1b34-4c0a-af40-58b8c8feab14.png)
+&nbsp;&nbsp;&nbsp;&nbsp;* MI layer dynamically generates its parameter depending on the context c<sub>ij</sub>
 &nbsp;&nbsp;&nbsp;&nbsp;* Dynamic edge feature which varies depending on the source node type.
 
 

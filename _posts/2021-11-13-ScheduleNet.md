@@ -74,24 +74,68 @@ tags:
 
 # How Type-aware Graph Attention works?
 1. "Type-aware" edge update
+
    i. Context embedding c<sub>ij</sub> of edge e<sub>ij</sub>
    ![Screenshot from 2021-11-15 14-27-11](https://user-images.githubusercontent.com/45442859/141727321-5bee78aa-c81c-4b34-963b-a3f443539540.png)
    * Source node j의 종류에 따라 context node Embedding 달라짐.  
 
    ii. Type-aware edge encoding
+
    ![Screenshot from 2021-11-15 14-43-35](https://user-images.githubusercontent.com/45442859/141728693-0311320f-1b34-4c0a-af40-58b8c8feab14.png)
    * MI layer dynamically generates its parameter depending on the context c<sub>ij</sub>  
    * Dynamic edge feature which varies depending on the source node type.
 
    iii. Type-aware edge encoding
+
    ![Screenshot from 2021-11-15 14-53-30](https://user-images.githubusercontent.com/45442859/141729548-efdc586c-8286-43dc-b71e-8426019848a5.png)
    * Upper one is for TGA<sub>E</sub>
    * Lower one is for TGA<sub>A</sub>
 
 2. Message Aggregation
    i. k type 별로 따로따로 attention score 구함.
-   ![Screenshot from 2021-11-15 15-01-54](https://user-images.githubusercontent.com/45442859/141730343-9a79d2be-12cf-416a-853a-94e5a9043efb.png)
-   
 
-Using the edge encoding, compute the updated edge features and attention logit using a MI layer.
-    3. 
+   ![Screenshot from 2021-11-15 15-01-54](https://user-images.githubusercontent.com/45442859/141730343-9a79d2be-12cf-416a-853a-94e5a9043efb.png)
+   * v<sub>i</sub>를 기준으로 주변에 type-k neighbor에 대하여 attention score 계산.
+   * 현재 세팅에선 agent, task, depot 세가지 종류의 노드가 존재하므로 두가지 attention score가 생길 것으로 예상.
+
+   ii. Attention score에 앞에서 구한 node embedding을 node type별로 곱해서 concat 진행.
+
+   ![Screenshot from 2021-11-15 18-51-34](https://user-images.githubusercontent.com/45442859/141760399-0607712d-826d-418a-bf69-e6939d863c62.png)  
+   ![Screenshot from 2021-11-15 18-53-05](https://user-images.githubusercontent.com/45442859/141760593-4eaae7b0-ffad-4b89-a839-15f3f646ba5c.png)
+
+3. Node Update
+   i. Context embedding c<sub>i</sub> of node v<sub>i</sub>
+
+   ![Screenshot from 2021-11-15 18-57-56](https://user-images.githubusercontent.com/45442859/141761370-535d7bff-ff19-4251-92b4-8a098da6578c.png)
+
+   ![Screenshot from 2021-11-15 18-58-59](https://user-images.githubusercontent.com/45442859/141761490-7dce797d-a9fd-43a5-92e1-edce69331d56.png)
+
+   ![Screenshot from 2021-11-15 18-59-30](https://user-images.githubusercontent.com/45442859/141761579-6260ed3f-2d68-4a88-afb8-3c7f64fe876d.png)
+
+4. Type-aware aggregation이 중요한 이유
+* Node distribution은 task의 갯수가 월등히 많을 가능성이 큼.
+* Type-aware aggregation은 위 같은 불균형으로 인해 생기는 학습의 어려움을 어느정도 완화. 
+
+# Overall Procedure
+
+![Screenshot from 2021-11-15 19-07-16](https://user-images.githubusercontent.com/45442859/141762834-379992f6-0e49-4535-b85c-8d0242cbc07e.png)
+
+* raw-2-hid: encode initial node and edge features to obtain initial h<sup>(0)</sup><sub>i</sub>, h<sup>(0)</sup><sub>ij</sub>
+* hid-2-hid: encode the target subgraph G<sup>s</sup><sub>&tau;</sub>
+* The subgraph is composed of a target-worker(unassigned-worker) node and all unassigned-city nodes.
+* hid-2-hid layer is repeated H times to obtain final hidden embeddings h<sup>(H)</sup><sub>i</sub>, h<sup>(H)</sup><sub>ij</sub>
+
+# Probability Generation Process
+
+![Screenshot from 2021-11-15 19-13-20](https://user-images.githubusercontent.com/45442859/141763664-bcbb3008-66cf-42cf-b128-9a92135d3afe.png)
+![Screenshot from 2021-11-15 19-13-49](https://user-images.githubusercontent.com/45442859/141763760-40a83659-e2db-47d2-bc79-1fa5229b6539.png)
+
+# Training
+
+1. Makespan Normalization
+
+   i. Only reward signal is makespan of mTSP, which is M(&pi;)
+   ii. Such reward varies depending on the problem size, topology of the map, and ...
+   iii. So, it is normalized using the equation below.
+   ![Screenshot from 2021-11-15 19-32-38](https://user-images.githubusercontent.com/45442859/141766563-472a6ab0-8a41-48be-84b5-60277b9d2a73.png)
+
